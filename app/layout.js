@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="mytheme">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,15 @@ export default function RootLayout({ children }) {
         <header>
           <div className="navbar bg-base-100">
             <div className="flex-1">
-              <a className="btn btn-ghost normal-case text-xl">Home</a>
+              <a className="btn btn-ghost normal-case text-xl" href="/">
+                Home
+              </a>
+              <a
+                className="btn btn-ghost normal-case text-xl"
+                href="/plantowners"
+              >
+                Plantowners
+              </a>
             </div>
             <div className="flex-none gap-2">
               <div className="form-control">
@@ -63,7 +71,7 @@ export default function RootLayout({ children }) {
             <a className="link link-hover">Press kit</a>
           </div>
           <div>
-            <div className="grid grid-flow-col gap-2">
+            <div className="grid grid-flow-col gap-4">
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
