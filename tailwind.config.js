@@ -15,14 +15,43 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui'),
+    function ({ addBase, theme, addComponents }) {
+      addBase({
+        h1: { fontSize: theme('fontSize.3xl') },
+        h2: { fontSize: theme('fontSize.xl') },
+        h3: { fontSize: theme('fontSize.lg') },
+      });
+      addComponents({
+        '.card': {
+          backgroundColor: theme('colors.white'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.6'),
+          boxShadow: theme('boxShadow.xl'),
+        },
+        button: {
+          backgroundColor: theme('colors.primary'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.3'),
+          boxShadow: theme('boxShadow.xl'),
+        },
+        input: {
+          backgroundColor: theme('colors.white'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.3'),
+          boxShadow: theme('boxShadow.xl'),
+        },
+      });
+    },
+  ],
 
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: 'orange',
-          secondary: 'yellow',
+          primary: '#94849B',
+          secondary: '#7E9181',
           accent: '#37cdbe',
           neutral: 'black',
           'base-100': 'white',

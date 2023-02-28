@@ -25,6 +25,9 @@ export default function RootLayout({ children }) {
               >
                 Plantowners
               </a>
+              <a className="btn btn-ghost normal-case text-xl" href="/test">
+                Test
+              </a>
             </div>
             <div className="flex-none gap-2">
               <div className="form-control">
@@ -37,7 +40,7 @@ export default function RootLayout({ children }) {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="/images/pic07.jpg" />
+                    <img src="/images/pic07.jpg" alt="avatar" />
                   </div>
                 </label>
                 <ul
@@ -61,7 +64,6 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </header>
-
         {children}
         <footer className="footer footer-center p-2 bg-base-100 text-base-content rounded">
           <div className="grid grid-flow-col gap-4">
