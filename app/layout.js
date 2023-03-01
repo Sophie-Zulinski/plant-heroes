@@ -1,6 +1,4 @@
 import './globals.css';
-import Image from 'next/image';
-import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,8 +23,11 @@ export default function RootLayout({ children }) {
               >
                 Plantowners
               </a>
-              <a className="btn btn-ghost normal-case text-xl" href="/test">
-                Test
+              <a
+                className="btn btn-ghost normal-case text-xl"
+                href="/plantsitters"
+              >
+                Plantsitters
               </a>
             </div>
             <div className="flex-none gap-2">
@@ -48,13 +49,24 @@ export default function RootLayout({ children }) {
                   className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <a className="justify-between">
+                    <a href="/profileplantowner" className="justify-between">
                       Profile
-                      <span className="badge">New</span>
                     </a>
                   </li>
                   <li>
-                    <a>Settings</a>
+                    <a href="/eventplantsitting">
+                      My Dates
+                      <span className="badge">2</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      Inbox
+                      <span className="badge">9</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>My favourites</a>
                   </li>
                   <li>
                     <a>Logout</a>
