@@ -15,7 +15,13 @@ export default function Home() {
               <div>I have a watering can</div>
             </div>
           </div>
-          <input placeholder="1030 Vienna" />
+          <label htmlFor="district">Choose a disctrict:</label>
+          <select id="disctrict" name="discrict">
+            <option value="1010">1010 Vienna</option>
+            <option value="1020">1020 Vienna</option>
+            <option value="1030">1030 Vienna</option>
+            <option value="1040">1040 Vienna</option>
+          </select>
 
           <button>Find</button>
         </div>

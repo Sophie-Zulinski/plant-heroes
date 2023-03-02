@@ -1,4 +1,4 @@
-import DatePicker from './DatePicker';
+import DatePicker from '../components/DatePicker';
 
 export default function ProfilePlantsitter() {
   return (

@@ -17,6 +17,7 @@ module.exports = {
   },
   plugins: [
     require('daisyui'),
+    require('@tailwindcss/forms'),
     function ({ addBase, theme, addComponents }) {
       addBase({
         h1: { fontSize: theme('fontSize.3xl') },
@@ -42,6 +43,21 @@ module.exports = {
           padding: theme('spacing.3'),
           boxShadow: theme('boxShadow.xl'),
         },
+        select: {
+          backgroundColor: theme('colors.white'),
+          borderColor: theme('colors.white'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.5.5'),
+
+          boxShadow: theme('boxShadow.xl'),
+        },
+        textarea: {
+          backgroundColor: theme('colors.white'),
+          borderColor: theme('colors.white'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.3'),
+          boxShadow: theme('boxShadow.xl'),
+        },
       });
     },
   ],
@@ -57,8 +73,6 @@ module.exports = {
           'base-100': 'white',
         },
       },
-      'dark',
-      'cupcake',
     ],
   },
 };

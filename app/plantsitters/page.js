@@ -1,70 +1,50 @@
 import Image from 'next/image';
-import DatePicker from '../profileplantsitter/DatePicker';
+import Link from 'next/link';
+import { users } from '../../database/users';
+import DatePicker from '../components/DatePicker';
+import PlantSitterDashboard from '../components/PlantSittersDashboard';
 
 export default function PlantSitters() {
+  const usersfiltered = users.filter((user) => user.district === '1010 Vienna');
+  // <PlantSitterDashboard district={user.district} />
   return (
-    <main className="min-h-screen">
-      <div className="sm:flex flex-row justify-evenly ">
-        <div className="flex flex-col p-10 gap-4">
-          <h1 className="bg-primary p-2 rounded-lg">
-            Find plantsitters near you:{' '}
-          </h1>
-          <input placeholder="Disctrict" />
-
-          <label id="date">
-            I look for a plantsitter from/to these dates:{' '}
-          </label>
-          <DatePicker />
-
-          <input placeholder="Price range" />
-          <input placeholder="Experience" />
-          <button>Find</button>
+    <main className="min-h-screen m">
+      <div className="sm:flex flex-row justify-evenly m ">
+        <div className="flex flex-col max-h-fit p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
+          {' '}
+          <PlantSitterDashboard />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-          <div className="flex flex-col p-5 gap-4 bg-white rounded-md mt-5 justify-center items-center">
-            <img
-              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-              src="images/sophie.jpg"
-              alt="profile pic"
-            />
-            <h1>Sophie</h1>
-            <span>xx.xx. 2023 - xx.xx. 2023</span>
-            <span>1030 Wien</span>
-            <button>Check out profile</button>
-          </div>
-          <div className="flex flex-col p-5 gap-4 bg-white rounded-md mt-5 justify-center items-center">
-            <img
-              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-              src="images/sophie.jpg"
-              alt="profile pic"
-            />
-            <h1>Sophie</h1>
-            <span>xx.xx. 2023 - xx.xx. 2023</span>
-            <span>1030 Wien</span>
-            <button>Check out profile</button>
-          </div>
-          <div className="flex flex-col p-5 gap-4 bg-white rounded-md mt-5 justify-center items-center">
-            <img
-              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-              src="images/sophie.jpg"
-              alt="profile pic"
-            />
-            <h1>Sophie</h1>
-            <span>xx.xx. 2023 - xx.xx. 2023</span>
-            <span>1030 Wien</span>
-            <button>Check out profile</button>
-          </div>
-          <div className="flex flex-col p-5 gap-4 bg-white rounded-md mt-5 justify-center items-center">
-            <img
-              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-              src="images/sophie.jpg"
-              alt="profile pic"
-            />
-            <h1>Sophie</h1>
-            <span>xx.xx. 2023 - xx.xx. 2023</span>
-            <span>1030 Wien</span>
-            <button>Check out profile</button>
-          </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {usersfiltered.map((user) => {
+            return (
+              <div
+                className="flex flex-col p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
+                key={user.id}
+              >
+                <Image
+                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                  src={`/images/${user.name}-${user.id}.jpg`}
+                  alt={user.name}
+                  width="300"
+                  height="300"
+                />
+
+                <Link
+                  data-test-id="product-<product id>"
+                  href={`/plantsitters/profile/${user.id}`}
+                >
+                  <h2>{user.name}</h2>
+                  <h4>{user.district}</h4>
+                  <div className="flex flex-row">
+                    {' '}
+                    <h4>{user.date_start}</h4> - <h4>{user.date_end}</h4>
+                  </div>
+                </Link>
+                <button>Check out profile</button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </main>

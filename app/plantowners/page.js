@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import DatePicker from '../profileplantsitter/DatePicker';
+import DatePicker from '../components/DatePicker';
 
 export default function PlantOwners() {
   return (

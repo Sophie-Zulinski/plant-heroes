@@ -1,4 +1,4 @@
-import DatePicker from '../profileplantsitter/DatePicker';
+import DatePicker from '../components/DatePicker';
 
 export default function ProfilePlantowners() {
   return (
@@ -16,16 +16,26 @@ export default function ProfilePlantowners() {
           <input placeholder="Password" />
           <input placeholder="Email" />
           <hr />
-          <input placeholder="Disctrict" />
+          <label htmlFor="district">Choose a disctrict:</label>
+          <select id="disctrict" name="discrict">
+            <option value="1010">1010 Vienna</option>
+            <option value="1020">1020 Vienna</option>
+            <option value="1030">1030 Vienna</option>
+            <option value="1040">1040 Vienna</option>
+          </select>
           <div>I will be on vacation from/to these dates: </div>
           <DatePicker />
           <button className="bg-white hover:bg-gray-100 text-gray-800  py-2 px-4 border border-gray-400 rounded shadow">
             Add more dates
           </button>
-          <input placeholder="Price range" />
+
           <input placeholder="Floor nr." />
           <input placeholder="Elevator" />
-          <input placeholder="Number of plants" />
+          <label htmlFor="elevator">Do yu have an elevator:</label>
+          <select id="elevator" name="elevator">
+            <option value="elevatoryes">yes</option>
+            <option value="elevatorno">no</option>
+          </select>
           <textarea placeholder="Write something about yourself" />
           <button>Register</button>
 

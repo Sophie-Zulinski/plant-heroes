@@ -66,7 +66,10 @@ export default function RootLayout({ children }) {
                     </a>
                   </li>
                   <li>
-                    <a>My favourites</a>
+                    <a>
+                      My favourites
+                      <span className="badge">1</span>
+                    </a>
                   </li>
                   <li>
                     <a>Logout</a>
