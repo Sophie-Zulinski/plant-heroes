@@ -40,8 +40,9 @@ export default function PlantSitters() {
                     {' '}
                     <h4>{user.date_start}</h4> - <h4>{user.date_end}</h4>
                   </div>
+                  <br />
+                  <button>Check out profile</button>
                 </Link>
-                <button>Check out profile</button>
               </div>
             );
           })}

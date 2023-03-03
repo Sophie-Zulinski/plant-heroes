@@ -11,14 +11,14 @@ export const users = [
     name: 'Elisabeth',
     date_start: '03.03.2023',
     date_end: '05.03.2023',
-    district: '1020 Vienna',
+    district: '1010 Vienna',
   },
   {
     id: 3,
     name: 'Susanne',
     date_start: '03.03.2023',
     date_end: '05.03.2023',
-    district: '1030 Vienna',
+    district: '1010 Vienna',
   },
   {
     id: 4,

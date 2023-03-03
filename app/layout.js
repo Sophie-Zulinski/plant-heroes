@@ -10,9 +10,9 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
 
-      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed">
+      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed ">
         <header>
-          <div className="navbar bg-base-100">
+          <div className="navbar bg-base-100 bg-neutral">
             <div className="flex-1">
               <a className="btn btn-ghost normal-case text-xl" href="/">
                 Home
@@ -55,20 +55,20 @@ export default function RootLayout({ children }) {
                   </li>
                   <li>
                     <a href="/eventplantsitting">
-                      My Dates
-                      <span className="badge">2</span>
+                      Plantsitting dates
+                      <span className="badge bg-secondary">2</span>
                     </a>
                   </li>
                   <li>
                     <a>
                       Inbox
-                      <span className="badge">9</span>
+                      <span className="badge bg-secondary">9</span>
                     </a>
                   </li>
                   <li>
                     <a>
-                      My favourites
-                      <span className="badge">1</span>
+                      Favourites
+                      <span className="badge bg-secondary">1</span>
                     </a>
                   </li>
                   <li>
@@ -80,7 +80,7 @@ export default function RootLayout({ children }) {
           </div>
         </header>
         {children}
-        <footer className="footer footer-center p-2 bg-base-100 text-base-content rounded">
+        <footer className="footer footer-center p-2 bg-base-100 text-base-content rounded bg-neutral">
           <div className="grid grid-flow-col gap-4">
             <a className="link link-hover">About us</a>
             <a className="link link-hover">Contact</a>
