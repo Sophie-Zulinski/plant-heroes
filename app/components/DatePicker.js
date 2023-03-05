@@ -6,12 +6,12 @@ import React, { useState } from 'react';
 import { DateRangePicker, END_DATE, START_DATE } from 'react-nice-dates';
 
 export default function DatePicker() {
-  const [startDate, setStartDate] = useState();
+  const [startdate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   return (
     <div className="border-solid  border-secondary">
       <DateRangePicker
-        startDate={startDate}
+        startDate={startdate}
         endDate={endDate}
         onStartDateChange={setStartDate}
         onEndDateChange={setEndDate}
