@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { users } from '../../database/users';
 
+export const dynamic = 'force-dynamic';
+
 export default function PlantSitters() {
   const [district, setDistrict] = useState('');
   const [startDate, setStartDate] = useState();
@@ -18,19 +20,19 @@ export default function PlantSitters() {
   // <PlantSitterDashboard district={user.district} />
 
   const usersfilteredstartdate = usersfiltered.filter(
-    (user) => user.start_date === startDate,
+    (user) => user.start_date <= startDate,
   );
 
   const usersfilteredenddate = usersfilteredstartdate.filter(
-    (user) => user.end_date === endDate,
+    (user) => user.end_date >= endDate,
   );
 
   const usersfilteredprice = usersfilteredenddate.filter(
-    (user) => user.price >= price,
+    (user) => parseInt(user.price) <= parseInt(price),
   );
 
   const usersfilteredexperience = usersfilteredprice.filter(
-    (user) => user.experience <= experience,
+    (user) => parseInt(user.experience) >= parseInt(experience),
   );
 
   function handleDistrict(x) {
@@ -85,28 +87,28 @@ export default function PlantSitters() {
         <input
           type="range"
           min="0"
-          max="40"
+          max="30"
           className="range range-xs range-primary"
           onClick={handlePrice}
         />
         <div className="w-full flex justify-between text-xs px-2">
-          <span>5,-</span>
-          <span>10,-</span>
-          <span>20,-</span>
-          <span>30,-</span>
-          <span>40,-</span>
+          <span>up to 10 €</span>
+          <span>10-19 € </span>
+          <span>20 -29 €</span>
+
+          <span> over 30 €</span>
         </div>
-        <div>Experience: </div>
+        <div>Minimum Experience: </div>
         <input
           type="range"
-          min="0"
-          max="10"
+          min="1"
+          max="9"
           className="range range-xs range-primary"
           onChange={handleExperience}
         />
         <div className="w-full flex justify-between text-xs px-2">
-          <span>0-5 years</span>
-          <span>6-10 years</span>
+          <span>0-4 years</span>
+          <span>5-10 years</span>
           <span> 10 + years </span>
         </div>
         <button>Find</button>
@@ -116,7 +118,7 @@ export default function PlantSitters() {
           return (
             <div
               className="flex flex-col p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
-              key={user.id}
+              key={`user-${user.id}`}
             >
               <Image
                 className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
@@ -126,10 +128,7 @@ export default function PlantSitters() {
                 height="300"
               />
 
-              <Link
-                data-test-id="product-<product id>"
-                href={`/plantsitters/profile/${user.id}`}
-              >
+              <Link href={`/plantsitters/${user.id}`}>
                 <h2>{user.name}</h2>
                 <h4>{user.district}</h4>
                 <div className="flex flex-row">

@@ -5,8 +5,9 @@ export const users = [
     start_date: '2023-03-08',
     end_date: '2023-03-10',
     district: '1010 Vienna',
-    price: '20',
+    price: '27',
     experience: '10',
+    description: 'Hi I am Sophie and I love plants',
   },
   {
     id: 2,
@@ -23,7 +24,7 @@ export const users = [
     start_date: '2023-03-08',
     end_date: '2023-03-10',
     district: '1010 Vienna',
-    price: '40',
+    price: '30',
     experience: '5',
   },
   {

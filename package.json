@@ -19,6 +19,7 @@
     "init": "^0.1.2",
     "js-cookie": "^3.0.1",
     "next": "13.2.0",
+    "node-fs": "^0.1.7",
     "patch-package": "^6.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
