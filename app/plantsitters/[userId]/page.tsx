@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { users } from '../../../database/users';
+import { getUsers } from '../../../database/users';
 
 type Props = {
   params: {
@@ -17,7 +17,8 @@ type singleUser = {
   experience: string;
 };
 
-export default function PlantSitter(props: Props) {
+export default async function PlantSitter(props: Props) {
+  const users = await getUsers();
   const singleUser = users.find((user) => {
     return user.id === parseInt(props.params.userId);
   });

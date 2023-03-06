@@ -1,4 +1,9 @@
-export const users = [
+import fs from 'node:fs';
+import { cache } from 'react';
+import { sql } from './connect';
+
+{
+  /*export const users = [
   {
     id: 1,
     name: 'Sophie',
@@ -36,4 +41,35 @@ export const users = [
     price: '0',
     experience: '10',
   },
-];
+];*/
+}
+
+export type User = {
+  id: number;
+  name: string;
+  price: number;
+  experince: string;
+  desciption: string;
+};
+
+// get all animals
+export const getUsers = cache(async () => {
+  const users = await sql<User[]>`
+    SELECT * FROM users
+  `;
+
+  return users;
+});
+
+// get a single animal
+export const getUserByID = cache(async (id: number) => {
+  const [user] = await sql<User[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ${id}
+  `;
+  return user;
+});
