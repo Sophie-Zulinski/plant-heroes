@@ -47,8 +47,9 @@ import { sql } from './connect';
 type User = {
   id: number;
   username: string;
+  district: string;
   price: number;
-  experince: string;
+  experience: string;
   desciption: string;
   passwordHash: string;
 };

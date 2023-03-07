@@ -4,10 +4,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
 
-export default function RegisterForm(props: { returnTo?: string | string[] }) {
+export default function LoginForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
 
@@ -16,7 +15,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
       onSubmit={async (event) => {
         event.preventDefault();
 
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/login', {
           method: 'POST',
           body: JSON.stringify({ username, password }),
         });
@@ -38,7 +37,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
-        router.push(`/profileplantsitter`);
+        router.push(`/profileplantowner/${data.user.username}`);
       }}
     >
       {errors.map((error) => (
@@ -58,8 +57,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
           onChange={(event) => setPassword(event.currentTarget.value)}
         />
       </label>
-
-      <button>Register</button>
+      <button>Login</button>
     </form>
   );
 }
