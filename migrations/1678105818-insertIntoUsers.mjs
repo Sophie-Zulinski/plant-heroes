@@ -1,7 +1,8 @@
 const users = [
   {
     id: 1,
-    name: 'Sophie',
+    username: 'Sophie',
+    password_hash: 'bsdfdbsfodsbfoidsbfisod',
     district: '1010 Vienna',
     price: 27,
     experience: 10,
@@ -12,7 +13,8 @@ const users = [
   },
   {
     id: 2,
-    name: 'Elisabeth',
+    username: 'Elisabeth',
+    password_hash: 'bsdfdbsfoddfsfdsbfoidsbfisod',
     district: '1010 Vienna',
     price: 20,
     experience: 7,
@@ -23,7 +25,8 @@ const users = [
   },
   {
     id: 3,
-    name: 'Susanne',
+    username: 'Susanne',
+    password_hash: 'bsdfdbsdfdsffoddfsfdsbfoidsbfisod',
     district: '1010 Vienna',
     price: 30,
     experience: 5,
@@ -34,7 +37,8 @@ const users = [
   },
   {
     id: 4,
-    name: 'Julia',
+    username: 'Julia',
+    password_hash: 'bsdfdbsdfdsfddsgsgoddfsfdsbfoidsbfisod',
     district: '1010 Vienna',
     price: 0,
     experience: 10,
@@ -48,7 +52,8 @@ export async function up(sql) {
   await sql`
   INSERT INTO users ${sql(
     users,
-    'name',
+    'username',
+    'password_hash',
     'district',
     'price',
     'experience',

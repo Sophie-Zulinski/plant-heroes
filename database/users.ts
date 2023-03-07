@@ -44,12 +44,13 @@ import { sql } from './connect';
 ];*/
 }
 
-export type User = {
+type User = {
   id: number;
-  name: string;
+  username: string;
   price: number;
   experince: string;
   desciption: string;
+  passwordHash: string;
 };
 
 // get all animals
@@ -73,3 +74,45 @@ export const getUserByID = cache(async (id: number) => {
   `;
   return user;
 });
+
+export const getUserByUsernameWithPasswordHash = cache(
+  async (username: string) => {
+    const [user] = await sql<User[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      username = ${username}
+  `;
+    return user;
+  },
+);
+
+export const getUserByUsername = cache(async (username: string) => {
+  const [user] = await sql<{ id: number; username: string }[]>`
+    SELECT
+      id,
+      username
+    FROM
+      users
+    WHERE
+      username = ${username}
+  `;
+  return user;
+});
+
+export const createUser = cache(
+  async (username: string, passwordHash: string) => {
+    const [user] = await sql<{ id: number; username: string }[]>`
+      INSERT INTO users
+        (username, password_hash)
+      VALUES
+        (${username}, ${passwordHash})
+      RETURNING
+        id,
+        username
+    `;
+    return user;
+  },
+);

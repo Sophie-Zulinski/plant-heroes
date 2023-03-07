@@ -123,14 +123,14 @@ export default function PlantSitterDashboard(props) {
             >
               <Image
                 className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                src={`/images/${user.name}-${user.id}.jpg`}
-                alt={user.name}
+                src={`/images/${user.username}-${user.id}.jpg`}
+                alt={user.username}
                 width="300"
                 height="300"
               />
 
               <Link href={`/plantsitters/${user.id}`}>
-                <h2>{user.name}</h2>
+                <h2>{user.username}</h2>
                 <h4>{user.district}</h4>
                 <div className="flex flex-row">
                   <h4>{user.startDate} </h4> {' - '}

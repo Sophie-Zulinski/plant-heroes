@@ -9,7 +9,7 @@ type Props = {
 
 type singleUser = {
   id: number;
-  name: string;
+  username: string;
   start_date: string;
   end_date: string;
   district: string;
@@ -31,11 +31,11 @@ export default async function PlantSitter(props: Props) {
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center">
           <img
             className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-            src={`/images/${singleUser.name}-${singleUser.id}.jpg`}
-            alt={singleUser.name}
+            src={`/images/${singleUser.username}-${singleUser.id}.jpg`}
+            alt={singleUser.username}
           />
 
-          <h1>{singleUser.name}</h1>
+          <h1>{singleUser.username}</h1>
           <div className="rating">
             <input
               type="radio"
