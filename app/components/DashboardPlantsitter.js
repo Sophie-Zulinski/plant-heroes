@@ -115,7 +115,7 @@ export default function PlantSitterDashboard(props) {
         <button>Find</button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {usersfilteredexperience.map((user) => {
+        {props.users.map((user) => {
           return (
             <div
               className="flex flex-col p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
