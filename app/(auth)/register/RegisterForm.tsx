@@ -38,7 +38,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
-        router.push(`/profileplantsitter`);
+        router.push(`/profile/${username}`);
       }}
     >
       {errors.map((error) => (
