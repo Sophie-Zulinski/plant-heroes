@@ -6,59 +6,59 @@ import {
   updateUserById,
 } from '../../../../../database/users';
 
-const animalType = z.object({
-  firstName: z.string(),
-  type: z.string(),
-  accessory: z.string(),
+const userType = z.object({
+  username: z.string(),
+  district: z.string(),
+  price: z.string(),
 });
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Record<string, string | string[]> },
 ) {
-  const animalId = Number(params.animalId);
+  const userId = Number(params.userId);
 
-  if (!animalId) {
+  if (!userId) {
     return NextResponse.json(
       {
-        error: 'Animal id is not valid',
+        error: 'User id is not valid',
       },
       { status: 400 },
     );
   }
 
-  const singleAnimal = await getUserByID(animalId);
+  const singleUser = await getUserByID(userId);
 
-  return NextResponse.json({ animal: singleAnimal });
+  return NextResponse.json({ user: singleUser });
 }
 
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Record<string, string | string[]> },
 ) {
-  const animalId = Number(params.animalId);
+  const userId = Number(params.userId);
 
-  if (!animalId) {
+  if (!userId) {
     return NextResponse.json(
       {
-        error: 'Animal id is not valid',
+        error: 'User id is not valid',
       },
       { status: 400 },
     );
   }
 
-  const singleAnimal = await deleteAnimalById(animalId);
+  const singleUser = await deleteUserById(userId);
 
-  return NextResponse.json({ animal: singleAnimal });
+  return NextResponse.json({ user: singleUser });
 }
 
 export async function PUT(
   request: NextRequest,
   { params }: { params: Record<string, string | string[]> },
 ) {
-  const animalId = Number(params.animalId);
+  const userId = Number(params.userId);
 
-  if (!animalId) {
+  if (!userId) {
     return NextResponse.json(
       {
         error: 'Animal id is not valid',
@@ -68,28 +68,28 @@ export async function PUT(
   }
 
   const body = await request.json();
-
-  const result = animalType.safeParse(body);
-
+  console.log('body', body);
+  const result = userType.safeParse(body);
+  console.log('result', body);
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
-    // console.log(result.error.issues);
+    console.log(result.error.issues);
 
     return NextResponse.json(
       {
         error:
-          'Request body is missing one of the needed properties firstName, type and accessory ',
+          'Request body is missing one of the needed properties name, district and price ',
       },
       { status: 400 },
     );
   }
 
-  const newAnimal = await updateAnimalById(
-    animalId,
-    result.data.firstName,
-    result.data.type,
-    result.data.accessory,
+  const newUser = await updateUserById(
+    userId,
+    result.data.username,
+    result.data.district,
+    result.data.price,
   );
 
-  return NextResponse.json({ animal: newAnimal });
+  return NextResponse.json({ user: newUser });
 }

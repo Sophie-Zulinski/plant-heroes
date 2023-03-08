@@ -5,7 +5,6 @@ import { createUser, getUsers } from '../../../../database/users';
 const userType = z.object({
   id: z.string(),
   username: z.string(),
-
   passwordHash: z.string(),
 });
 
@@ -29,7 +28,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          'Request body is missing one of the needed properties firstName, type and accessory ',
+          'Request body is missing one of the needed properties name, type and accessory ',
       },
       { status: 400 },
     );
