@@ -44,14 +44,11 @@ import { sql } from './connect';
 ];*/
 }
 
-type User = {
+export type User = {
   id: number;
   username: string;
   district: string;
-  price: number;
-  experience: string;
-  desciption: string;
-  passwordHash: string;
+  price: string;
 };
 
 // get all animals
@@ -128,3 +125,33 @@ export const createUser = cache(
     return user;
   },
 );
+
+export const updateUserById = cache(
+  async (id: number, username: string, district: string, price: string) => {
+    const [user] = await sql<User[]>`
+      UPDATE
+        users
+      SET
+      username = ${username},
+      district = ${district},
+      price = ${price}
+
+
+      WHERE
+        id = ${id}
+      RETURNING *
+    `;
+    return user;
+  },
+);
+
+export const deleteUserById = cache(async (id: number) => {
+  const [user] = await sql<User[]>`
+    DELETE FROM
+      users
+    WHERE
+      id = ${id}
+    RETURNING *
+  `;
+  return user;
+});

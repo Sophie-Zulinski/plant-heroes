@@ -11,9 +11,9 @@ export default function Dashboard(props: Props) {
   // const router = useRouter();
   const [users, setUsers] = useState<User[]>(props.users);
   const [idOnEditMode, setIdOnEditMode] = useState<number>();
-  const [username, setUserName] = useState<string>('');
-  const [type, setType] = useState<string>('');
-  const [accessory, setAccessory] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
+  const [price, setPrice] = useState<string>('');
   const [editFirstName, setEditFirstName] = useState<string>('');
   const [editType, setEditType] = useState<string>('');
   const [editAccessory, setEditAccessory] = useState<string>('');
@@ -22,24 +22,24 @@ export default function Dashboard(props: Props) {
   return (
     <div>
       <label>
-        First Name:
+        Name:
         <input
           value={username}
-          onChange={(event) => setUserName(event.currentTarget.value)}
+          onChange={(event) => setUsername(event.currentTarget.value)}
         />
       </label>
       <label>
-        Type:
+        Distrcit
         <input
-          value={type}
-          onChange={(event) => setType(event.currentTarget.value)}
+          value={district}
+          onChange={(event) => setDistrict(event.currentTarget.value)}
         />
       </label>
       <label>
-        Accessory:
+        Price:
         <input
-          value={accessory}
-          onChange={(event) => setAccessory(event.currentTarget.value)}
+          value={price}
+          onChange={(event) => setPrice(event.currentTarget.value)}
         />
       </label>
       <button
@@ -49,7 +49,7 @@ export default function Dashboard(props: Props) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username }),
+            body: JSON.stringify({ username, district, price }),
           });
 
           const data = await response.json();
@@ -61,10 +61,10 @@ export default function Dashboard(props: Props) {
           // you should use this
           // router.refresh();
 
-          setUsers([...users, data.user]);
+          setUsers([...users, data.User]);
         }}
       >
-        Create Animal
+        Create User
       </button>
       {typeof error === 'string' && <div style={{ color: 'red' }}>{error}</div>}
       <div>
@@ -81,7 +81,7 @@ export default function Dashboard(props: Props) {
               />
             )}{' '}
             {idOnEditMode !== user.id ? (
-              user.type
+              user.district
             ) : (
               <input
                 value={editType}
@@ -89,7 +89,7 @@ export default function Dashboard(props: Props) {
               />
             )}{' '}
             {idOnEditMode !== user.id ? (
-              user.accessory
+              user.price
             ) : (
               <input
                 value={editAccessory}
@@ -127,6 +127,8 @@ export default function Dashboard(props: Props) {
                 onClick={() => {
                   setIdOnEditMode(user.id);
                   setEditFirstName(user.username);
+                  setEditType(user.district);
+                  setEditAccessory(user.price || '');
                 }}
               >
                 edit
@@ -140,12 +142,14 @@ export default function Dashboard(props: Props) {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      UserName: editFirstName,
+                      username: editFirstName,
+                      district: editType,
+                      price: editAccessory,
                     }),
                   });
 
                   const data = await response.json();
-
+                  console.log(data);
                   if (data.error) {
                     setError(data.error);
                     return;
@@ -154,9 +158,9 @@ export default function Dashboard(props: Props) {
 
                   // router.refresh();
                   setUsers(
-                    users.map((animalOnState) => {
-                      return animalOnState.id !== data.user.id
-                        ? animalOnState
+                    users.map((userOnState) => {
+                      return userOnState.id !== data.user.id
+                        ? userOnState
                         : data.user;
                     }),
                   );
