@@ -10,7 +10,8 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "app/profile/[id]/Registerform.tsx"
   ],
   "compilerOptions": {
     "jsx": "preserve",

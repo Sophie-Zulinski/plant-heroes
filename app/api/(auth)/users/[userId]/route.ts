@@ -61,7 +61,7 @@ export async function PUT(
   if (!userId) {
     return NextResponse.json(
       {
-        error: 'Animal id is not valid',
+        error: 'User id is not valid',
       },
       { status: 400 },
     );
