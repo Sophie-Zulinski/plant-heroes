@@ -37,7 +37,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
-        router.push(`/profileplantowner/${data.user.username}`);
+        router.push(`/profile/${data.user.username}`);
       }}
     >
       {errors.map((error) => (

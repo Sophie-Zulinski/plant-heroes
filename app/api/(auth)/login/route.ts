@@ -1,14 +1,17 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createSession } from '../../../../database/sessions';
 import { getUserByUsernameWithPasswordHash } from '../../../../database/users';
+import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
 
 const userSchema = z.object({
   username: z.string(),
   password: z.string(),
 });
 
-export type RegisterResponseBody =
+export type LoginResponseBodyPost =
   | { errors: { message: string }[] }
   | { user: { username: string } };
 
@@ -66,8 +69,29 @@ export const POST = async (request: NextRequest) => {
   }
 
   // 4. create a session (in the next chapter)
+  // create token
+  const token = crypto.randomBytes(80).toString('base64');
+  console.log('token', token);
+  // create the session
+  const session = await createSession(token, userWithPasswordHash.id);
+  console.log('session', session);
+  // attach the new cookie serialized to the header of the request
 
-  return NextResponse.json({
-    user: { username: userWithPasswordHash.username },
-  });
+  if (!session) {
+    return NextResponse.json(
+      { errors: [{ message: 'session creation failed' }] },
+      { status: 500 },
+    );
+  }
+  const serializedCookie = createSerializedRegisterSessionTokenCookie(
+    session.token,
+  );
+  console.log('serializedCookie', serializedCookie);
+  // add the new header
+  return NextResponse.json(
+    {
+      user: { username: userWithPasswordHash.username },
+    },
+    { status: 200, headers: { 'Set-Cookie': serializedCookie } },
+  );
 };

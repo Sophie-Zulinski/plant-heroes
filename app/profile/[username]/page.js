@@ -1,9 +1,13 @@
 import { notFound } from 'next/navigation';
-import { getUserByID, getUsers } from '../../../database/users';
+import {
+  getUserByID,
+  getUserByUsername,
+  getUsers,
+} from '../../../database/users';
 import Dashboard from './Dashboard';
 
 export default async function UserProfile({ params }) {
-  const user = await getUserByID(params.id);
+  const user = await getUserByUsername(params.username);
 
   if (!user) {
     notFound();
