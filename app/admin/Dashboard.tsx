@@ -154,6 +154,7 @@ export default function Dashboard(props: Props) {
                     setError(data.error);
                     return;
                   }
+                  console.log(data.error.issues);
                   setIdOnEditMode(undefined);
 
                   // router.refresh();

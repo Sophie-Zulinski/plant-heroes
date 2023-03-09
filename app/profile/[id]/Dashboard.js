@@ -3,7 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function ProfilePlantsitter(props) {
-  const [users, setUsers] = useState(props.users);
+  const [users, setUser] = useState(props);
+
   const [district, setDistrict] = useState('');
 
   const [price, setPrice] = useState('');
@@ -27,6 +28,7 @@ export default function ProfilePlantsitter(props) {
   function handleDescription(x) {
     setDescription(x.target.value);
   }
+
   return (
     <>
       <span>Please upload a picture of yourself</span>
@@ -43,7 +45,6 @@ export default function ProfilePlantsitter(props) {
         <option value="1030 Vienna">1030 Vienna</option>
         <option value="1040 Vienna">1040 Vienna</option>
       </select>
-
       <div>Price: </div>
       <input
         type="range"
@@ -72,7 +73,6 @@ export default function ProfilePlantsitter(props) {
         <span>5-10 years</span>
         <span> 10 + years </span>
       </div>
-
       <input
         placeholder="Write something about yourself"
         onChange={handleDescription}
@@ -80,16 +80,18 @@ export default function ProfilePlantsitter(props) {
 
       <button
         onClick={async () => {
-          const response = await fetch(`/api/users/${props.id}`, {
+          const response = await fetch(`/api/users/${props.user.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+              username: props.user.username,
               district: district,
               price: price,
             }),
           });
+          console.log('PROPS', props.user.id);
           console.log('response', response);
           const data = await response.json();
           console.log('data', data);
@@ -100,7 +102,7 @@ export default function ProfilePlantsitter(props) {
           // you should use this
           // router.refresh();
 
-          setUsers([...users, data.user]);
+          setUser([data.user]);
         }}
       >
         Update Profile
