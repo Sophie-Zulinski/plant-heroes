@@ -18,7 +18,7 @@ export default async function UserProfile({ params }) {
           <p>district: {user.district}</p>
           <p>price: {user.price},- €</p>
           <p>experience: {user.experience} years</p>
-          <Dashboard user={user} />;
+          <Dashboard user={user} />;{console.log('user', user)}
         </div>
       </div>
     </main>
