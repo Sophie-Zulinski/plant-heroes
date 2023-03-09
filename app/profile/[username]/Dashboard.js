@@ -37,7 +37,7 @@ export default function ProfilePlantsitter(props) {
         src="../images/sophie.jpg"
         alt="profile pic"
       />
-      <h1>Please insert your data</h1>
+
       <label htmlFor="district">Choose a disctrict:</label>
       <select name="discrict" onClick={handleDistrict}>
         <option value="1010 Vienna">1010 Vienna</option>
@@ -99,8 +99,8 @@ export default function ProfilePlantsitter(props) {
             setError(data.error);
             return;
           }
-          // you should use this
-          // router.refresh();
+
+          router.refresh();
 
           setUser([data.user]);
         }}
