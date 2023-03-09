@@ -43,7 +43,7 @@ export function createSerializedRegisterSessionTokenCookie(token: string) {
     // new browser
     maxAge: maxAge,
     // for internet explorer and old browsers
-    expire: new Date(
+    expires: new Date(
       Date.now() + maxAge * 1000, // 24 hours in milliseconds
     ),
 
