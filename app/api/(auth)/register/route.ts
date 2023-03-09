@@ -5,17 +5,20 @@ import { z } from 'zod';
 import { createSession } from '../../../../database/sessions';
 import { createUser, getUserByUsername } from '../../../../database/users';
 import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
+import { createCsrfSecret } from '../../../../utils/csrf';
 
 const userSchema = z.object({
   username: z.string(),
   password: z.string(),
 });
 
-export type RegisterResponseBody =
+export type RegisterResponseBodyPost =
   | { errors: { message: string }[] }
   | { user: { username: string } };
 
-export const POST = async (request: NextRequest) => {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<RegisterResponseBodyPost>> {
   // 1. validate the data
   const body = await request.json();
 
@@ -65,14 +68,15 @@ export const POST = async (request: NextRequest) => {
       { status: 500 },
     );
   }
+
   // 5. create a session (in the next chapter)
-  // create token
+  // - create the token
   const token = crypto.randomBytes(80).toString('base64');
-  console.log('token', token);
-  // create the session
-  const session = await createSession(token, newUser.id);
-  console.log('session', session);
-  // attach the new cookie serialized to the header of the request
+
+  const csrfSecret = createCsrfSecret();
+
+  // - create the session
+  const session = await createSession(token, newUser.id, csrfSecret);
 
   if (!session) {
     return NextResponse.json(
@@ -80,6 +84,7 @@ export const POST = async (request: NextRequest) => {
       { status: 500 },
     );
   }
+
   const serializedCookie = createSerializedRegisterSessionTokenCookie(
     session.token,
   );
@@ -93,4 +98,4 @@ export const POST = async (request: NextRequest) => {
       headers: { 'Set-Cookie': serializedCookie },
     },
   );
-};
+}

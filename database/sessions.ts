@@ -1,19 +1,29 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
-export const createSession = cache(async (token: string, userId: number) => {
-  const [session] = await sql<{ id: number; token: string }[]>`
+type Session = {
+  id: number;
+  token: string;
+  csrfSecret: string;
+};
+
+export const createSession = cache(
+  async (token: string, userId: number, csrfSecret: string) => {
+    const [session] = await sql<{ id: number; token: string }[]>`
       INSERT INTO sessions
-        (token, user_id)
+        (token, user_id, csrf_secret)
       VALUES
-        (${token}, ${userId})
+        (${token}, ${userId}, ${csrfSecret})
       RETURNING
         id,
         token
     `;
-  await deleteExpiredSessions();
-  return session;
-});
+
+    await deleteExpiredSessions();
+
+    return session;
+  },
+);
 
 export const deleteExpiredSessions = cache(async () => {
   await sql`
