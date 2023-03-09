@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { createSession } from '../../../../database/sessions';
 import { getUserByUsernameWithPasswordHash } from '../../../../database/users';
 import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
+import { createCsrfSecret } from '../../../../utils/csrf';
 
 const userSchema = z.object({
   username: z.string(),
@@ -15,7 +16,9 @@ export type LoginResponseBodyPost =
   | { errors: { message: string }[] }
   | { user: { username: string } };
 
-export const POST = async (request: NextRequest) => {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<LoginResponseBodyPost>> {
   // 1. validate the data
   const body = await request.json();
 
@@ -69,13 +72,17 @@ export const POST = async (request: NextRequest) => {
   }
 
   // 4. create a session (in the next chapter)
-  // create token
+  // - create the token
   const token = crypto.randomBytes(80).toString('base64');
-  console.log('token', token);
-  // create the session
-  const session = await createSession(token, userWithPasswordHash.id);
-  console.log('session', session);
-  // attach the new cookie serialized to the header of the request
+
+  const csrfSecret = createCsrfSecret();
+
+  // - create the session
+  const session = await createSession(
+    token,
+    userWithPasswordHash.id,
+    csrfSecret,
+  );
 
   if (!session) {
     return NextResponse.json(
@@ -83,15 +90,21 @@ export const POST = async (request: NextRequest) => {
       { status: 500 },
     );
   }
+
   const serializedCookie = createSerializedRegisterSessionTokenCookie(
     session.token,
   );
-  console.log('serializedCookie', serializedCookie);
+
   // add the new header
+
   return NextResponse.json(
     {
       user: { username: userWithPasswordHash.username },
     },
-    { status: 200, headers: { 'Set-Cookie': serializedCookie } },
+    {
+      status: 200,
+      // - Attach the new cookie serialized to the header of the response
+      headers: { 'Set-Cookie': serializedCookie },
+    },
   );
-};
+}
