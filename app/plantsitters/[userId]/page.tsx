@@ -14,8 +14,8 @@ type Props = {
 type SingleUser = {
   id: number;
   username: string;
-  start_date: string;
-  end_date: string;
+  startDate: string;
+  endDate: string;
   district: string;
   price: string;
   experience: string;
@@ -86,7 +86,7 @@ export default async function PlantSitter(props: Props) {
           <div className="flex flex-row space-x-4">
             <input type="checkbox" className="checkbox checkbox-primary" />
             <span>
-              {singleUser.start_date}-{singleUser.end_date}{' '}
+              {singleUser.startDate}-{singleUser.endDate}{' '}
             </span>
           </div>
 

@@ -35,6 +35,10 @@ export default function PlantSitterDashboard(props) {
   const usersfilteredexperience = usersfilteredprice.filter(
     (user) => parseInt(user.experience) >= parseInt(experience),
   );
+  const [role, setRole] = useState('');
+  function handleRole(x) {
+    setRole('yes');
+  }
 
   function handleDistrict(x) {
     setDistrict(x.target.value);
@@ -57,7 +61,7 @@ export default function PlantSitterDashboard(props) {
   return (
     <div className="sm:flex flex-row justify-evenly m ">
       <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
-        <h2>Find plantsitters near you </h2>
+        <h2>Find plant heroes near you </h2>
         <hr />
         <hr />
         <label htmlFor="district">Choose a disctrict:</label>
@@ -72,7 +76,7 @@ export default function PlantSitterDashboard(props) {
           <div>
             {' '}
             <label htmlFor="start">
-              I look for a plantsitter from/to these dates:
+              I look for a plant hero from/to these dates:
             </label>
           </div>
 
@@ -112,39 +116,75 @@ export default function PlantSitterDashboard(props) {
           <span>5-10 years</span>
           <span> 10 + years </span>
         </div>
-        <button>Find</button>
+        <button onClick={handleRole}>Filter</button>
+        {console.log('role', role)}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {props.users.map((user) => {
-          return (
-            <div
-              className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
-              key={`user-${user.id}`}
-            >
-              <Image
-                className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                src={`/images/${user.username}-${user.id}.jpg`}
-                alt={user.username}
-                width="300"
-                height="300"
-              />
 
-              <Link href={`/plantsitters/${user.id}`}>
-                <h2>{user.username}</h2>
-                <h4>{user.district}</h4>
-                <div className="flex flex-row">
-                  <h4>{user.startDate} </h4> {' - '}
-                  <h4>{user.endDate} </h4>
-                </div>
-                <h4>Price: {user.price},- €/hour </h4>
-                <h4>Experience {user.experience} years</h4>
-                <br />
-                <button>Check out profile</button>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      {role ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {usersfilteredexperience.map((user) => {
+            return (
+              <div
+                className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
+                key={`user-${user.id}`}
+              >
+                <Image
+                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                  src={`/images/${user.username}-${user.id}.jpg`}
+                  alt={user.username}
+                  width="300"
+                  height="300"
+                />
+
+                <Link href={`/plantsitters/${user.id}`}>
+                  <h2>{user.username}</h2>
+                  <h4>{user.district}</h4>
+                  <div className="flex flex-row">
+                    <h4>{user.startDate} </h4> {' - '}
+                    <h4>{user.endDate} </h4>
+                  </div>
+                  <h4>Price: {user.price},- €/hour </h4>
+                  <h4>Experience {user.experience} years</h4>
+                  <br />
+                  <button>Check out profile</button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {props.users.map((user) => {
+            return (
+              <div
+                className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
+                key={`user-${user.id}`}
+              >
+                <Image
+                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                  src={`/images/${user.username}-${user.id}.jpg`}
+                  alt={user.username}
+                  width="300"
+                  height="300"
+                />
+
+                <Link href={`/plantsitters/${user.id}`}>
+                  <h2>{user.username}</h2>
+                  <h4>{user.district}</h4>
+                  <div className="flex flex-row">
+                    <h4>{user.startDate} </h4> {' - '}
+                    <h4>{user.endDate} </h4>
+                  </div>
+                  <h4>Price: {user.price},- €/hour </h4>
+                  <h4>Experience {user.experience} years</h4>
+                  <br />
+                  <button>Check out profile</button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

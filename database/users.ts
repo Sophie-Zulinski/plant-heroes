@@ -47,14 +47,9 @@ import { sql } from './connect';
 export type User = {
   id: number;
   username: string;
-  start_date: string;
-  end_date: string;
   district: string;
   price: string;
-  experience: string;
-  description: string;
 };
-
 type UserWithPasswordHash = User & {
   passwordHash: string;
 };
@@ -160,6 +155,26 @@ export const deleteUserById = cache(async (id: number) => {
     WHERE
       id = ${id}
     RETURNING *
+  `;
+  return user;
+});
+
+export const getUserBySessionToken = cache(async (token: string) => {
+  const [user] = await sql<
+    { id: number; username: string; csrfSecret: string }[]
+  >`
+    SELECT
+      users.id,
+      users.username,
+      sessions.csrf_secret
+    FROM
+      users
+    INNER JOIN
+      sessions ON (
+        sessions.token = ${token} AND
+        sessions.user_id = users.id AND
+        sessions.expiry_timestamp > now()
+      )
   `;
   return user;
 });

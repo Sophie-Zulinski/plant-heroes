@@ -31,13 +31,18 @@ export default function ProfilePlantsitter(props) {
 
   return (
     <>
-      <span>Please upload a picture of yourself</span>
       <img
         className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-        src="../images/sophie.jpg"
-        alt="profile pic"
+        src={`/images/${props.user.username}-${props.user.id}.jpg`}
+        alt={props.user.username}
       />
+      <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
+      <h2>Your current data: </h2>
 
+      <p>District: {props.user.district}</p>
+      <p>Price: {props.user.price},- €</p>
+      <p>Experience: {props.user.experience} years</p>
+      <h2>Update your data:</h2>
       <label htmlFor="district">Choose a disctrict:</label>
       <select name="discrict" onClick={handleDistrict}>
         <option value="1010 Vienna">1010 Vienna</option>
@@ -60,7 +65,7 @@ export default function ProfilePlantsitter(props) {
 
         <span> over 30 €</span>
       </div>
-      <div>Minimum Experience: </div>
+      <div>Experience: </div>
       <input
         type="range"
         min="1"
