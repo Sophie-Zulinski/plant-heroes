@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { User } from '../../database/users';
@@ -18,7 +19,7 @@ export default function Dashboard(props: Props) {
   const [editType, setEditType] = useState<string>('');
   const [editAccessory, setEditAccessory] = useState<string>('');
   const [error, setError] = useState<string>();
-
+  const router = useRouter();
   return (
     <div>
       <label>
@@ -58,8 +59,8 @@ export default function Dashboard(props: Props) {
             setError(data.error);
             return;
           }
-          // you should use this
-          // router.refresh();
+          //you should use this
+          router.refresh();
 
           setUsers([...users, data.User]);
         }}
@@ -149,12 +150,12 @@ export default function Dashboard(props: Props) {
                   });
 
                   const data = await response.json();
-                  console.log(data);
+                  console.log('data', data);
                   if (data.error) {
                     setError(data.error);
                     return;
                   }
-                  console.log(data.error.issues);
+                  console.log('data error', data.error);
                   setIdOnEditMode(undefined);
 
                   // router.refresh();

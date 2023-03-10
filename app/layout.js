@@ -1,8 +1,23 @@
 import './globals.css';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+import { getUserBySessionToken } from '../database/users';
 
 export const dynamic = 'force-dynamic';
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // 1. get the session token from the cookie
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  // 2. validate that session
+  // 3. get the user profile matching the session
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
+  // if user is not undefined, the person is logged in
+  // if user is undefined, the person is logged out
   return (
     <html lang="en" data-theme="mytheme">
       <head>
@@ -41,7 +56,14 @@ export default function RootLayout({ children }) {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="/images/pic07.jpg" alt="avatar" />
+                    {user ? (
+                      <img
+                        src={`/images/${user.username}-${user.id}.jpg`}
+                        alt={user.username}
+                      />
+                    ) : (
+                      <img src="/images/pic07.jpg" alt="avatar" />
+                    )}
                   </div>
                 </label>
                 <ul
@@ -49,30 +71,37 @@ export default function RootLayout({ children }) {
                   className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <a href="/profileplantowner" className="justify-between">
-                      Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/eventplantsitting">
-                      Plantsitting dates
-                      <span className="badge bg-secondary">2</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      Inbox
-                      <span className="badge bg-secondary">9</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      Favourites
-                      <span className="badge bg-secondary">1</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>Logout</a>
+                    {user ? (
+                      <>
+                        Logged in as: {user.username}
+                        <Link
+                          href={`/profile/${user.username}`}
+                          prefetch={false}
+                        >
+                          My Profile
+                        </Link>
+                        <Link href="/eventplantsitting">
+                          Plantsitting dates
+                          <span className="badge bg-secondary">2</span>
+                        </Link>
+                        <Link href="/">
+                          Inbox
+                          <span className="badge bg-secondary">9</span>
+                        </Link>
+                        <Link href="/">
+                          Favourites
+                          <span className="badge bg-secondary">1</span>
+                        </Link>
+                        <Link href="/logout" prefetch={false}>
+                          Logout
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/register">Register</Link>
+                        <Link href="/login">Login</Link>
+                      </>
+                    )}
                   </li>
                 </ul>
               </div>
