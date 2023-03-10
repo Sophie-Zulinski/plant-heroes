@@ -1,5 +1,9 @@
+import { cookies } from 'next/headers';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
+import { getValidSessionByToken } from '../../../database/sessions';
 import { getUsers } from '../../../database/users';
+import { createTokenFromSecret } from '../../../utils/csrf';
 
 type Props = {
   params: {
@@ -7,7 +11,7 @@ type Props = {
   };
 };
 
-type singleUser = {
+type SingleUser = {
   id: number;
   username: string;
   start_date: string;
@@ -15,11 +19,26 @@ type singleUser = {
   district: string;
   price: string;
   experience: string;
+  description: string;
 };
 
 export default async function PlantSitter(props: Props) {
+  // check if i have a valid session
+  const sessionTokenCookie = cookies().get('sessionToken');
+
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+
+  // for example you may also check if session user is an admin role
+
+  if (!session) {
+    redirect(`/login?returnTo=/plantsitters/`);
+  }
+
+  const csrfToken = createTokenFromSecret(session.csrfSecret);
   const users = await getUsers();
-  const singleUser = users.find((user) => {
+  const singleUser: SingleUser = users.find((user) => {
     return user.id === parseInt(props.params.userId);
   });
 

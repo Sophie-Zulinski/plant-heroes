@@ -1,5 +1,5 @@
 import { getUsers } from '../../database/users';
-import PlantSitterDashboard from '../components/DashboardPlantsitter';
+import PlantSitterDashboard from './DashboardPlantsitter';
 
 export default async function PlantSitters() {
   const users = await getUsers();

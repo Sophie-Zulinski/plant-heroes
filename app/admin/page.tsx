@@ -5,7 +5,7 @@ import { getUsers } from '../../database/users';
 import { createTokenFromSecret } from '../../utils/csrf';
 import Dashboard from './Dashboard';
 
-export default async function AnimalAdminPage() {
+export default async function AdminPage() {
   // check if i have a valid session
   const sessionTokenCookie = cookies().get('sessionToken');
 

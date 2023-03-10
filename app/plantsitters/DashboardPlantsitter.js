@@ -3,7 +3,7 @@ import 'react-nice-dates/build/style.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,7 +56,7 @@ export default function PlantSitterDashboard(props) {
   }
   return (
     <div className="sm:flex flex-row justify-evenly m ">
-      <div className="flex flex-col max-h-fit p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
+      <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
         <h2>Find plantsitters near you </h2>
         <hr />
         <hr />
@@ -118,7 +118,7 @@ export default function PlantSitterDashboard(props) {
         {props.users.map((user) => {
           return (
             <div
-              className="flex flex-col p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
+              className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
               key={`user-${user.id}`}
             >
               <Image
