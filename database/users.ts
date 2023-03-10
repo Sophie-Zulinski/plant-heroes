@@ -47,8 +47,12 @@ import { sql } from './connect';
 export type User = {
   id: number;
   username: string;
+  start_date: string;
+  end_date: string;
   district: string;
   price: string;
+  experience: string;
+  description: string;
 };
 
 type UserWithPasswordHash = User & {
