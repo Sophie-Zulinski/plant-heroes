@@ -37,32 +37,62 @@ export default function ProfilePlantsitter(props) {
   function handlePlants(x) {
     setPlants(x.target.value);
   }
+  const [result, setResult] = useState('');
+  const handleImageUpload = (event) => {
+    event.preventDefault();
+    const file = event.currentTarget['fileInput'].files[0];
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('https://echo-api.3scale.net/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setResult(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <>
-      <img
-        className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-        src={`/images/${props.user.username}-${props.user.id}.jpg`}
-        alt={props.user.username}
-      />
-      <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
-
-      <h2>Your current data: </h2>
-      <p>Role: {props.user.role} </p>
-      <p>District: {props.user.district} </p>
-      {role === 'Plantsitter' ? (
-        <>
-          <p>Price: {props.user.price},- € </p>
-          <p>Experience: {props.user.experience} years </p>
-        </>
-      ) : (
-        ''
-      )}
-      {role === 'Plantowner' ? <p>Plants: {props.user.plants} </p> : ''}
-      <p>Description: {props.user.description} </p>
-      <div className="divider" />
-      <h2>Update your data:</h2>
-
+      <>
+        <img
+          className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+          src={`/images/${props.user.username}-${props.user.id}.jpg`}
+          alt={props.user.username}
+        />
+        <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
+        <h2>Your current data: </h2>
+        <p>Role: {props.user.role} </p>
+        <p>District: {props.user.district} </p>
+        {role === 'Plantsitter' ? (
+          <>
+            <p>Price: {props.user.price},- € </p>
+            <p>Experience: {props.user.experience} years </p>
+          </>
+        ) : (
+          ''
+        )}
+        {role === 'Plantowner' ? <p>Plants: {props.user.plants} </p> : ''}
+        <p>Description: {props.user.description} </p>
+        <div className="divider" />
+        <h2>Update your data:</h2>
+        <h2>Upload Image:</h2>
+        <form onSubmit={handleImageUpload}>
+          <input id="fileInput" type="file" />
+          <input type="submit" />
+        </form>
+        <br />
+        <br />
+        Result:
+        <br />
+        <pre>{JSON.stringify(result, null, 2)}</pre>
+      </>
       <div className="flex flex-row space-x-4">
         <label>
           <input
@@ -88,7 +118,6 @@ export default function ProfilePlantsitter(props) {
           I have a plant and need a plant hero
         </label>
       </div>
-
       <>
         <p>
           District: {props.user.district}{' '}
