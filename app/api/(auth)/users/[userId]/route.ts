@@ -10,6 +10,9 @@ const userType = z.object({
   username: z.string(),
   district: z.string(),
   price: z.string(),
+  experience: z.string(),
+  description: z.string(),
+  role: z.string(),
 });
 
 export async function GET(
@@ -89,6 +92,9 @@ export async function PUT(
     result.data.username,
     result.data.district,
     result.data.price,
+    result.data.experience,
+    result.data.description,
+    result.data.role,
   );
 
   return NextResponse.json({ user: newUser });

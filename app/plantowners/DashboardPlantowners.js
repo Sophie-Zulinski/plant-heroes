@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export const dynamic = 'force-dynamic';
 
-export default function PlantSitterDashboard(props) {
+export default function PlantOwnerDashboard(props) {
   const [district, setDistrict] = useState('');
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -16,8 +16,8 @@ export default function PlantSitterDashboard(props) {
   const [experience, setExperience] = useState('');
   const router = useRouter();
 
-  const usersplantsitters = props.users.filter(
-    (user) => user.role === 'Plantsitter',
+  const usersplantowners = props.users.filter(
+    (user) => user.role === 'Plantowner',
   );
 
   const usersfiltered = props.users.filter(
@@ -66,7 +66,7 @@ export default function PlantSitterDashboard(props) {
   return (
     <div className="sm:flex flex-row justify-evenly m ">
       <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
-        <h2>Find plant heroes near you </h2>
+        <h2>Find plants near you </h2>
         <hr />
         <hr />
         <label htmlFor="district">Choose a disctrict:</label>
@@ -81,7 +81,7 @@ export default function PlantSitterDashboard(props) {
           <div>
             {' '}
             <label htmlFor="start">
-              I look for a plant hero from/to these dates:
+              I want to be a plant hero from/to these dates:
             </label>
           </div>
 
@@ -159,7 +159,7 @@ export default function PlantSitterDashboard(props) {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {usersplantsitters.map((user) => {
+          {usersplantowners.map((user) => {
             return (
               <div
                 className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
