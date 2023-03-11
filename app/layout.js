@@ -32,32 +32,17 @@ export default async function RootLayout({ children }) {
               <a className="btn btn-ghost normal-case text-xl" href="/">
                 Home
               </a>
-              <a
-                className="btn btn-ghost normal-case text-xl"
-                href="/plantowners"
-              >
-                Plantowners
-              </a>
-              <a
-                className="btn btn-ghost normal-case text-xl"
-                href="/plantsitters"
-              >
-                Plantsitters
-              </a>
             </div>
             <div className="flex-none gap-2">
               <div className="form-control">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="input input-bordered"
-                />
+                <input placeholder="Search" className="input input-bordered" />
               </div>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                     {user ? (
                       <img
+                        className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
                         src={`/images/${user.username}-${user.id}.jpg`}
                         alt={user.username}
                       />

@@ -9,7 +9,7 @@ const users = [
     description: 'Hi I am Sophie and I love plants',
     start_date: '2023-04-08',
     end_date: '2023-04-10',
-    role: 'plantsitter',
+    role: 'Plantsitter',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const users = [
     description: 'Hi I am Elisabeth and I love plants',
     start_date: '2023-04-08',
     end_date: '2023-04-10',
-    role: 'plantsitter',
+    role: 'Plantsitter',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const users = [
     description: 'Hi I am Susanne and I love plants',
     start_date: '2023-04-08',
     end_date: '2023-04-10',
-    role: 'plantowner',
+    role: 'Plantowner',
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const users = [
     description: 'Hi I am Julia and I love plants',
     start_date: '2023-05-08',
     end_date: '2023-05-10',
-    role: 'plantowner',
+    role: 'Plantowner',
   },
 ];
 export async function up(sql) {

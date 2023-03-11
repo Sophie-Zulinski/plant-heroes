@@ -12,6 +12,10 @@ export default function ProfilePlantsitter(props) {
   const [description, setDescription] = useState('');
   const [error, setError] = useState();
   const router = useRouter();
+  const [role, setRole] = useState('');
+  function handleRole(x) {
+    setRole(x.target.value);
+  }
 
   function handleDistrict(x) {
     setDistrict(x.target.value);
@@ -42,7 +46,34 @@ export default function ProfilePlantsitter(props) {
       <p>District: {props.user.district}</p>
       <p>Price: {props.user.price},- €</p>
       <p>Experience: {props.user.experience} years</p>
+      <p>Description: {props.user.description} </p>
+      <p>Role: {props.user.role} </p>
       <h2>Update your data:</h2>
+      <div className="flex flex-row space-x-4">
+        <label>
+          <input
+            type="radio"
+            name="radio-2"
+            value="Plantsitter"
+            className="radio radio-primary m-1.5 "
+            onClick={handleRole}
+          />{' '}
+          I have a plant and need a plant hero
+        </label>
+        {console.log('role', role)}
+      </div>
+      <div className="flex flex-row space-x-4">
+        <label>
+          <input
+            type="radio"
+            name="radio-2"
+            value="Plantowner"
+            className="radio radio-primary  m-1.5 "
+            onClick={handleRole}
+          />
+          I have a watering can and want to become a plant hero
+        </label>
+      </div>
       <label htmlFor="district">Choose a disctrict:</label>
       <select name="discrict" onClick={handleDistrict}>
         <option value="1010 Vienna">1010 Vienna</option>
@@ -94,6 +125,9 @@ export default function ProfilePlantsitter(props) {
               username: props.user.username,
               district: district,
               price: price,
+              experience: experience,
+              description: description,
+              role: role,
             }),
           });
           console.log('PROPS', props.user.id);
