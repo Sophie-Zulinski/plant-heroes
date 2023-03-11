@@ -9,15 +9,18 @@ import {
 const userType = z.object({
   username: z.string(),
   district: z.string(),
-  price: z.string(),
+  price: z.number(),
   experience: z.string(),
   description: z.string(),
   role: z.string(),
+  plants: z.string(),
 });
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Record<string, string | string[]> },
+  {
+    params,
+  }: { params: Record<string, string | string[] | number | undefined | null> },
 ) {
   const userId = Number(params.userId);
 
@@ -57,7 +60,9 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Record<string, string | string[]> },
+  {
+    params,
+  }: { params: Record<string, string | string[] | number | null | undefined> },
 ) {
   const userId = Number(params.userId);
 
@@ -95,6 +100,7 @@ export async function PUT(
     result.data.experience,
     result.data.description,
     result.data.role,
+    result.data.plants,
   );
 
   return NextResponse.json({ user: newUser });

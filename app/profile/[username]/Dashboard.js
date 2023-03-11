@@ -5,14 +5,15 @@ import { useState } from 'react';
 export default function ProfilePlantsitter(props) {
   const [users, setUser] = useState(props);
 
-  const [district, setDistrict] = useState('');
+  const [district, setDistrict] = useState(props.user.district);
 
-  const [price, setPrice] = useState('');
-  const [experience, setExperience] = useState('');
-  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('1');
+  const [plants, setPlants] = useState('1');
+  const [experience, setExperience] = useState('1');
+  const [description, setDescription] = useState(props.user.description);
   const [error, setError] = useState();
   const router = useRouter();
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState(props.user.role);
   function handleRole(x) {
     setRole(x.target.value);
   }
@@ -22,7 +23,7 @@ export default function ProfilePlantsitter(props) {
   }
 
   function handlePrice(x) {
-    setPrice(x.target.value);
+    setPrice(parseInt(x.target.value));
   }
 
   function handleExperience(x) {
@@ -33,6 +34,10 @@ export default function ProfilePlantsitter(props) {
     setDescription(x.target.value);
   }
 
+  function handlePlants(x) {
+    setPlants(x.target.value);
+  }
+
   return (
     <>
       <img
@@ -41,14 +46,23 @@ export default function ProfilePlantsitter(props) {
         alt={props.user.username}
       />
       <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
-      <h2>Your current data: </h2>
 
-      <p>District: {props.user.district}</p>
-      <p>Price: {props.user.price},- €</p>
-      <p>Experience: {props.user.experience} years</p>
-      <p>Description: {props.user.description} </p>
+      <h2>Your current data: </h2>
       <p>Role: {props.user.role} </p>
+      <p>District: {props.user.district} </p>
+      {role === 'Plantsitter' ? (
+        <>
+          <p>Price: {props.user.price},- € </p>
+          <p>Experience: {props.user.experience} years </p>
+        </>
+      ) : (
+        ''
+      )}
+      {role === 'Plantowner' ? <p>Plants: {props.user.plants} </p> : ''}
+      <p>Description: {props.user.description} </p>
+      <div className="divider" />
       <h2>Update your data:</h2>
+
       <div className="flex flex-row space-x-4">
         <label>
           <input
@@ -58,7 +72,7 @@ export default function ProfilePlantsitter(props) {
             className="radio radio-primary m-1.5 "
             onClick={handleRole}
           />{' '}
-          I have a plant and need a plant hero
+          I have a watering can and want to become a plant hero
         </label>
         {console.log('role', role)}
       </div>
@@ -71,81 +85,105 @@ export default function ProfilePlantsitter(props) {
             className="radio radio-primary  m-1.5 "
             onClick={handleRole}
           />
-          I have a watering can and want to become a plant hero
+          I have a plant and need a plant hero
         </label>
       </div>
-      <label htmlFor="district">Choose a disctrict:</label>
-      <select name="discrict" onClick={handleDistrict}>
-        <option value="1010 Vienna">1010 Vienna</option>
-        <option value="1020 Vienna">1020 Vienna</option>
-        <option value="1030 Vienna">1030 Vienna</option>
-        <option value="1040 Vienna">1040 Vienna</option>
-      </select>
-      <div>Price: </div>
-      <input
-        type="range"
-        min="0"
-        max="30"
-        className="range range-xs range-primary"
-        onClick={handlePrice}
-      />
-      <div className="w-full flex justify-between text-xs px-2">
-        <span>up to 10 €</span>
-        <span>10-19 € </span>
-        <span>20 -29 €</span>
 
-        <span> over 30 €</span>
-      </div>
-      <div>Experience: </div>
-      <input
-        type="range"
-        min="1"
-        max="10"
-        className="range range-xs range-primary"
-        onChange={handleExperience}
-      />
-      <div className="w-full flex justify-between text-xs px-2">
-        <span>0-4 years</span>
-        <span>5-10 years</span>
-        <span> 10 + years </span>
-      </div>
-      <input
-        placeholder="Write something about yourself"
-        onChange={handleDescription}
-      />
+      <>
+        <p>
+          District: {props.user.district}{' '}
+          <select name="discrict" onClick={handleDistrict}>
+            <option value="1010 Vienna">1010 Vienna</option>
+            <option value="1020 Vienna">1020 Vienna</option>
+            <option value="1030 Vienna">1030 Vienna</option>
+            <option value="1040 Vienna">1040 Vienna</option>
+          </select>
+        </p>
+        {role === 'Plantsitter' ? (
+          <>
+            <p>
+              Price:{' '}
+              <input
+                type="number"
+                min="1"
+                max="30"
+                placeholder={props.user.price}
+                onChange={handlePrice}
+              />{' '}
+              ,- €
+            </p>
+            <p>
+              Experience:{' '}
+              <input
+                type="number"
+                placeholder={props.user.experience}
+                min="1"
+                max="10"
+                onChange={handleExperience}
+              />{' '}
+              years
+            </p>
+          </>
+        ) : (
+          ''
+        )}
+        {role === 'Plantowner' ? (
+          <p>
+            Plants:{' '}
+            <input
+              type="number"
+              placeholder={props.user.plants}
+              min="1"
+              max="30"
+              onChange={handlePlants}
+            />{' '}
+          </p>
+        ) : (
+          ''
+        )}
 
-      <button
-        onClick={async () => {
-          const response = await fetch(`/api/users/${props.user.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: props.user.username,
-              district: district,
-              price: price,
-              experience: experience,
-              description: description,
-              role: role,
-            }),
-          });
-          console.log('PROPS', props.user.id);
-          console.log('response', response);
-          const data = await response.json();
-          console.log('data', data);
-          if (data.error) {
-            setError(data.error);
-            return;
-          }
+        <p>
+          Description:{' '}
+          <input
+            placeholder={props.user.description}
+            onChange={handleDescription}
+          />
+        </p>
 
-          router.refresh();
+        <button
+          onClick={async () => {
+            const response = await fetch(`/api/users/${props.user.id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                username: props.user.username,
+                district: district,
+                price: price,
+                experience: experience,
+                description: description,
+                plants: plants,
+                role: role,
+              }),
+            });
+            console.log('PROPS', props.user.id);
+            console.log('response', response);
+            const data = await response.json();
+            console.log('data', data);
+            if (data.error) {
+              setError(data.error);
+              return;
+            }
 
-          setUser([data.user]);
-        }}
-      >
-        Update Profile
-      </button>
+            router.refresh();
+
+            setUser([data.user]);
+          }}
+        >
+          Update Profile
+        </button>
+      </>
     </>
   );
 }
