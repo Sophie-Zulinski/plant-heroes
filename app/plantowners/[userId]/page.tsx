@@ -22,7 +22,7 @@ type SingleUser = {
   description: string;
 };
 
-export default async function PlantSitter(props: Props) {
+export default async function PlantOwners(props: Props) {
   // check if i have a valid session
   const sessionTokenCookie = cookies().get('sessionToken');
 

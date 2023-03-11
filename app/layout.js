@@ -1,4 +1,5 @@
 import './globals.css';
+import { Cloudinary } from '@cloudinary/url-gen';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
