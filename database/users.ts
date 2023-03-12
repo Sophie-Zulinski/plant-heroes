@@ -52,6 +52,8 @@ export type User = {
   description: string;
   role: string;
   plants: string | null;
+  start_date: string | null;
+  end_date: string | null;
 };
 type UserWithPasswordHash = User & {
   passwordHash: string;
@@ -104,6 +106,8 @@ export const getUserByUsername = cache(async (username: string) => {
       description: string;
       role: string;
       plants: string | null;
+      start_date: string | null;
+      end_date: string | null;
     }[]
   >`
     SELECT
@@ -114,7 +118,9 @@ export const getUserByUsername = cache(async (username: string) => {
       experience,
       description,
       role,
-      plants
+      plants,
+      start_date,
+      end_date
     FROM
       users
     WHERE
@@ -148,6 +154,8 @@ export const updateUserById = cache(
     description: string,
     role: string,
     plants: string | null,
+    start_date: string | null,
+    end_date: string | null,
   ) => {
     const [user] = await sql<User[]>`
       UPDATE
@@ -159,7 +167,9 @@ export const updateUserById = cache(
       experience = ${experience},
       description = ${description},
       role= ${role},
-      plants= ${plants}
+      plants= ${plants},
+      start_date=${start_date},
+      end_date=${end_date}
 
       WHERE
         id = ${id}

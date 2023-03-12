@@ -1,4 +1,5 @@
 'use client';
+import dateFormat, { masks } from 'dateformat';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -10,6 +11,8 @@ export default function ProfilePlantsitter(props) {
   const [price, setPrice] = useState('1');
   const [plants, setPlants] = useState('1');
   const [experience, setExperience] = useState('1');
+  const [startDate, setStartDate] = useState(props.user.startDate);
+  const [endDate, setEndDate] = useState(props.user.endDate);
   const [description, setDescription] = useState(props.user.description);
   const [error, setError] = useState();
   const router = useRouter();
@@ -32,6 +35,13 @@ export default function ProfilePlantsitter(props) {
 
   function handleDescription(x) {
     setDescription(x.target.value);
+  }
+  function handleStartDate(x) {
+    setStartDate(x.target.value);
+  }
+
+  function handleEndDate(x) {
+    setEndDate(x.target.value);
   }
 
   function handlePlants(x) {
@@ -78,7 +88,20 @@ export default function ProfilePlantsitter(props) {
         ) : (
           ''
         )}
-        {role === 'Plantowner' ? <p>Plants: {props.user.plants} </p> : ''}
+        {role === 'Plantowner' ? (
+          <>
+            <p>Plants: {props.user.plants} </p>
+            <h4>
+              Your next vacation: {'     '}
+              {dateFormat(props.user.startDate, 'mmmm dS')}
+              {' -'}
+              {dateFormat(props.user.endDate, 'mmmm dS yyyy')}{' '}
+            </h4>
+            {console.log('userprops', props.user.startDate)}
+          </>
+        ) : (
+          ''
+        )}
         <p>Description: {props.user.description} </p>
         <div className="divider" />
         <h2>Update your data:</h2>
@@ -157,16 +180,26 @@ export default function ProfilePlantsitter(props) {
           ''
         )}
         {role === 'Plantowner' ? (
-          <p>
-            Plants:{' '}
+          <>
+            <p>
+              Plants:{' '}
+              <input
+                type="number"
+                placeholder={props.user.plants}
+                min="1"
+                max="30"
+                onChange={handlePlants}
+              />{' '}
+            </p>
             <input
-              type="number"
-              placeholder={props.user.plants}
-              min="1"
-              max="30"
-              onChange={handlePlants}
-            />{' '}
-          </p>
+              className="bg-primary"
+              type="date"
+              id="start"
+              name="start"
+              onChange={handleStartDate}
+            />
+            <input type="date" id="end" name="end" onChange={handleEndDate} />
+          </>
         ) : (
           ''
         )}
@@ -194,6 +227,8 @@ export default function ProfilePlantsitter(props) {
                 description: description,
                 plants: plants,
                 role: role,
+                startDate: startDate,
+                endDate: endDate,
               }),
             });
             console.log('PROPS', props.user.id);
