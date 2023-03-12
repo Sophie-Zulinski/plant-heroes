@@ -1,5 +1,7 @@
 'use client';
-import 'react-nice-dates/build/style.css';
+
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -9,8 +11,6 @@ export const dynamic = 'force-dynamic';
 
 export default function PlantSitterDashboard(props) {
   const [district, setDistrict] = useState('');
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
 
   const [price, setPrice] = useState('');
   const [experience, setExperience] = useState('');
@@ -20,29 +20,21 @@ export default function PlantSitterDashboard(props) {
     (user) => user.role === 'Plantsitter',
   );
 
-  const usersfiltered = props.users.filter(
+  const usersfiltered = usersplantsitters.filter(
     (user) => user.district === district,
   );
   // <PlantSitterDashboard district={user.district} />
 
-  const usersfilteredstartdate = usersfiltered.filter(
-    (user) => user.startDate <= startDate,
-  );
-
-  const usersfilteredenddate = usersfilteredstartdate.filter(
-    (user) => user.endDate >= endDate,
-  );
-
-  const usersfilteredprice = usersfilteredenddate.filter(
+  const usersfilteredprice = usersfiltered.filter(
     (user) => parseInt(user.price) <= parseInt(price),
   );
 
   const usersfilteredexperience = usersfilteredprice.filter(
     (user) => parseInt(user.experience) >= parseInt(experience),
   );
-  const [role, setRole] = useState('');
-  function handleRole(x) {
-    setRole('yes');
+  const [filter, setFilter] = useState('');
+  function handleFilter(x) {
+    setFilter('yes');
   }
 
   function handleDistrict(x) {
@@ -56,50 +48,30 @@ export default function PlantSitterDashboard(props) {
   function handleExperience(x) {
     setExperience(x.target.value);
   }
-  function handleStartDate(x) {
-    setStartDate(x.target.value);
-  }
 
-  function handleEndDate(x) {
-    setEndDate(x.target.value);
-  }
   return (
     <div className="sm:flex flex-row justify-evenly m ">
-      <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
-        <h2>Find plant heroes near you </h2>
+      <div className="flex flex-col h-max p-12 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
+        <h2>Find plants near you </h2>
+
         <hr />
         <hr />
         <label htmlFor="district">Choose a disctrict:</label>
-        <select name="discrict" onClick={handleDistrict}>
+        <select name="discrict" onChange={handleDistrict}>
           <option value="1010 Vienna">1010 Vienna</option>
           <option value="1020 Vienna">1020 Vienna</option>
           <option value="1030 Vienna">1030 Vienna</option>
           <option value="1040 Vienna">1040 Vienna</option>
         </select>
 
-        <div className="border-solid  border-secondary">
-          <div>
-            {' '}
-            <label htmlFor="start">
-              I look for a plant hero from/to these dates:
-            </label>
-          </div>
-
-          <input
-            type="date"
-            id="start"
-            name="start"
-            onChange={handleStartDate}
-          />
-          <input type="date" id="end" name="end" onChange={handleEndDate} />
-        </div>
         <div>Price: </div>
+
         <input
           type="range"
           min="0"
           max="30"
           className="range range-xs range-primary"
-          onClick={handlePrice}
+          onChange={handlePrice}
         />
         <div className="w-full flex justify-between text-xs px-2">
           <span>up to 10 €</span>
@@ -109,23 +81,38 @@ export default function PlantSitterDashboard(props) {
           <span> over 30 €</span>
         </div>
         <div>Minimum Experience: </div>
-        <input
-          type="range"
-          min="1"
-          max="10"
-          className="range range-xs range-primary"
-          onChange={handleExperience}
-        />
+
+        <Box width={300}>
+          <Slider
+            min={0}
+            max={10}
+            defaultValue={5}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            marks
+            onChange={handleExperience}
+            sx={{
+              width: 300,
+              color: '#b5ba9e',
+            }}
+          />
+        </Box>
+
         <div className="w-full flex justify-between text-xs px-2">
-          <span>0-4 years</span>
-          <span>5-10 years</span>
-          <span> 10 + years </span>
+          <span>0 years</span>
+          <span>5 years</span>
+          <span> 10 years </span>
         </div>
-        <button onClick={handleRole}>Filter</button>
-        {console.log('role', role)}
+        <button
+          onClick={() => {
+            handleFilter('yes');
+          }}
+        >
+          Filter
+        </button>
       </div>
 
-      {role ? (
+      {filter ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {usersfilteredexperience.map((user) => {
             return (
@@ -144,10 +131,7 @@ export default function PlantSitterDashboard(props) {
                 <Link href={`/plantsitters/${user.id}`}>
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
-                  <div className="flex flex-row">
-                    <h4>{user.startDate} </h4> {' - '}
-                    <h4>{user.endDate} </h4>
-                  </div>
+
                   <h4>Price: {user.price},- €/hour </h4>
                   <h4>Experience {user.experience} years</h4>
                   <br />
@@ -176,10 +160,7 @@ export default function PlantSitterDashboard(props) {
                 <Link href={`/plantsitters/${user.id}`}>
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
-                  <div className="flex flex-row">
-                    <h4>{user.startDate} </h4> {' - '}
-                    <h4>{user.endDate} </h4>
-                  </div>
+
                   <h4>Price: {user.price},- €/hour </h4>
                   <h4>Experience {user.experience} years</h4>
                   <br />

@@ -33,7 +33,7 @@ export default async function PlantOwners(props: Props) {
   // for example you may also check if session user is an admin role
 
   if (!session) {
-    redirect(`/login?returnTo=/plantsitters/`);
+    redirect(`/login?returnTo=/plantsowners/`);
   }
 
   const csrfToken = createTokenFromSecret(session.csrfSecret);
