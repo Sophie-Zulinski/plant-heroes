@@ -83,17 +83,6 @@ export default async function PlantSitter(props: Props) {
             />
           </div>
 
-          <div className="flex flex-row space-x-4">
-            <input type="checkbox" className="checkbox checkbox-primary" />
-            <span>
-              {singleUser.startDate}-{singleUser.endDate}{' '}
-            </span>
-          </div>
-
-          <button className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
-            Show more dates
-          </button>
-
           <span>{singleUser.district}</span>
 
           <span>{singleUser.price},- €</span>
