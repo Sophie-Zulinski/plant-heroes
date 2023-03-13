@@ -88,19 +88,6 @@ export default function ProfilePlantsitter(props) {
         ) : (
           ''
         )}
-        {role === 'Plantowner' ? (
-          <>
-            <p>Plants: {props.user.plants} </p>
-            <h4>
-              Your next vacation: {'     '} {props.user.startDate}
-              {' -'}
-              {props.user.endDate}{' '}
-            </h4>
-            {console.log('userprops', props.user.startDate)}
-          </>
-        ) : (
-          ''
-        )}
         <p>Description: {props.user.description} </p>
         <div className="divider" />
         <h2>Update your data:</h2>
@@ -178,30 +165,6 @@ export default function ProfilePlantsitter(props) {
         ) : (
           ''
         )}
-        {role === 'Plantowner' ? (
-          <>
-            <p>
-              Plants:{' '}
-              <input
-                type="number"
-                placeholder={props.user.plants}
-                min="1"
-                max="30"
-                onChange={handlePlants}
-              />{' '}
-            </p>
-            <input
-              className="bg-primary"
-              type="date"
-              id="start"
-              name="start"
-              onChange={handleStartDate}
-            />
-            <input type="date" id="end" name="end" onChange={handleEndDate} />
-          </>
-        ) : (
-          ''
-        )}
 
         <p>
           Description:{' '}
@@ -226,8 +189,6 @@ export default function ProfilePlantsitter(props) {
                 description: description,
                 plants: plants,
                 role: role,
-                startDate: startDate,
-                endDate: endDate,
               }),
             });
             console.log('PROPS', props.user.id);

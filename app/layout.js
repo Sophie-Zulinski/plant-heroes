@@ -66,9 +66,9 @@ export default async function RootLayout({ children }) {
                         >
                           My Profile
                         </Link>
-                        <Link href="/eventplantsitting">
-                          Plantsitting dates
-                          <span className="badge bg-secondary">2</span>
+                        <Link href={`/vacations/${user.username}`}>
+                          Vacations
+                          <span className="badge bg-secondary">1</span>
                         </Link>
                         <Link href="/">
                           Inbox
