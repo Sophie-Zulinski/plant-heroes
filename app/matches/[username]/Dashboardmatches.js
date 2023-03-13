@@ -1,24 +1,18 @@
 'use client';
 import dateFormat, { masks } from 'dateformat';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Matches(props) {
-  const [users, setUser] = useState(props);
-  const [error, setError] = useState();
-  const router = useRouter();
+  const usersrole = props.users.filter((user) => user.role !== props.user.role);
 
-  const [startDate, setStartDate] = useState('no date');
-  const [endDate, setEndDate] = useState('no date');
-
-  const [result, setResult] = useState('');
-
-  const usersplantowners = props.users.filter(
-    (users) => props.users === props.user.role,
+  const usersdistrict = usersrole.filter(
+    (user) => user.district === props.user.district,
   );
-  console.log('props.users.role)', props.users.role);
-  console.log('props.users', props.users);
-  console.log('usersplantwoeners', usersplantowners);
+
+  console.log('props.user.role)', props.user.role);
+  console.log('usersrole', usersrole);
+
   return (
     <>
       <img
@@ -26,45 +20,49 @@ export default function Matches(props) {
         src={`/images/${props.user.username}-${props.user.id}.jpg`}
         alt={props.user.username}
       />
-      <h1> Here are your matches, {props.user.username}!</h1>
-      <p>Role: {props.user.role} </p>
+      <h1> Check out your perfect match, {props.user.username}!</h1>
+      <div>We have selected some users, that might be perfect for you </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {usersdistrict.map((user) => {
+          return (
+            <div
+              className="flex flex-row p-5 gap-4 h-max bg-neutral rounded-md mt-5 justify-center items-center "
+              key={`user-${user.id}`}
+            >
+              <Image
+                className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                src={`/images/${user.username}-${user.id}.jpg`}
+                alt={user.username}
+                width="300"
+                height="300"
+              />
 
-      <button
-        onClick={async () => {
-          const response = await fetch(`/api/users/${props.user.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: props.user.username,
-
-              district: props.user.district,
-              price: props.user.price,
-              experience: props.user.experience,
-              description: props.user.description,
-              plants: props.user.plants.toString(),
-              role: props.user.role,
-              startDate: props.startDate,
-              endDate: props.endDate,
-            }),
-          });
-          console.log('PROPS', props.user.id);
-          console.log('response', response);
-          const data = await response.json();
-          console.log('data', data);
-          if (data.error) {
-            setError(data.error);
-            return;
-          }
-
-          router.refresh();
-
-          setUser([data.user]);
-        }}
-      >
-        Update Vacation
-      </button>
+              <Link href={`/plantowners/${user.id}`}>
+                <h2>{user.username}</h2>
+                <h4>{user.district}</h4>
+                <div className="flex flex-row">
+                  {user.startDate ? (
+                    <h4>
+                      {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
+                    </h4>
+                  ) : (
+                    ''
+                  )}{' '}
+                  {user.endDate ? (
+                    <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <h4>Price: {user.price},- €/hour </h4>
+                <h4>{user.plants} plants</h4>
+                <br />
+                <button>Check out profile</button>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
