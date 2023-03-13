@@ -19,6 +19,7 @@ export default async function RootLayout({ children }) {
 
   // if user is not undefined, the person is logged in
   // if user is undefined, the person is logged out
+
   return (
     <html lang="en" data-theme="mytheme">
       <head>
