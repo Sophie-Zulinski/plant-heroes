@@ -1,5 +1,7 @@
 'use client';
 import 'react-nice-dates/build/style.css';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import dateFormat, { masks } from 'dateformat';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,24 +47,28 @@ export default function PlantOwnerDashboard(props) {
   function handleFilter(x) {
     setFilter('yes');
   }
+  function resetlist(ev) {
+    ev.preventDefault();
+    setFilter('');
+  }
 
   function handleDistrict(x) {
     setDistrict(x.target.value);
   }
 
-  function handlePrice(x) {
-    setPrice(x.target.value);
-  }
-
-  function handlePlants(x) {
-    setPlants(x.target.value);
-  }
   function handleStartDate(x) {
     setStartDate(x.target.value);
   }
 
   function handleEndDate(x) {
     setEndDate(x.target.value);
+  }
+  function handlePrice(x) {
+    setPrice(x.target.value);
+  }
+
+  function handlePlants(x) {
+    setPlants(x.target.value);
   }
 
   return (
@@ -88,7 +94,6 @@ export default function PlantOwnerDashboard(props) {
           </div>
 
           <input
-            className="bg-primary"
             type="date"
             id="start"
             name="start"
@@ -97,45 +102,66 @@ export default function PlantOwnerDashboard(props) {
           <input type="date" id="end" name="end" onChange={handleEndDate} />
         </div>
         <div>Price: </div>
-        <input
-          type="range"
-          min="0"
-          max="31"
-          className="range range-xs range-primary"
-          onClick={handlePrice}
-        />
+        <Box width={300}>
+          <Slider
+            min={0}
+            max={30}
+            defaultValue={15}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            marks
+            onChange={handlePrice}
+            sx={{
+              width: 300,
+              color: '#b5ba9e',
+            }}
+          />
+        </Box>
         <div className="w-full flex justify-between text-xs px-2">
-          <span>up to 10 €</span>
-          <span>10-19 € </span>
-          <span>20 -29 €</span>
+          <span> 0 €</span>
 
-          <span> over 30 €</span>
+          <span> 30 €</span>
         </div>
         <div>Number of Plants: </div>
-        <input
-          type="range"
-          min="0"
-          max="10"
-          className="range range-xs range-primary"
-          onChange={handlePlants}
-        />
+
+        <Box width={300}>
+          <Slider
+            min={0}
+            max={20}
+            defaultValue={5}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            marks
+            onChange={handlePlants}
+            sx={{
+              width: 300,
+              color: '#b5ba9e',
+            }}
+          />
+        </Box>
+
         <div className="w-full flex justify-between text-xs px-2">
-          <span>0-5 plants</span>
-          <span>5-15 plants</span>
-          <span> 15 + plants </span>
+          <span>0 plants</span>
+
+          <span> 20 plants</span>
         </div>
-        <button
-          onClick={() => {
-            handleFilter('yes');
-          }}
-        >
-          Filter
-        </button>
+        <span>
+          <button className="m-3" onClick={resetlist}>
+            Reset{' '}
+          </button>
+          <button
+            onClick={() => {
+              handleFilter('yes');
+            }}
+          >
+            Filter
+          </button>
+        </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
       {filter ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {usersfilteredplants.map((user) => {
+          {usersfilteredprice.map((user) => {
             return (
               <div
                 className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
