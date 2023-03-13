@@ -2,7 +2,6 @@ import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'formidable';
 import Formidable from 'formidable';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { up } from '../../migrations/1678105818-insertIntoUsers.mjs';
 
 const endpoint = async (req: NextApiRequest, res: NextApiResponse) => {
   cloudinary.config({
@@ -29,7 +28,6 @@ const endpoint = async (req: NextApiRequest, res: NextApiResponse) => {
       width: 500,
       crop: 'limit',
     });
-    console.log('uploadedImage', uploadedImage);
     res.statusCode = 200;
     res.json({ secure_url: uploadedImage.secure_url });
   } catch (error) {

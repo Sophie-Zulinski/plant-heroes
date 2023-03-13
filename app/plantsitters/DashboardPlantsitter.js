@@ -36,6 +36,10 @@ export default function PlantSitterDashboard(props) {
   function handleFilter(x) {
     setFilter('yes');
   }
+  function resetlist(ev) {
+    ev.preventDefault();
+    setFilter('');
+  }
 
   function handleDistrict(x) {
     setDistrict(x.target.value);
@@ -66,19 +70,25 @@ export default function PlantSitterDashboard(props) {
 
         <div>Price: </div>
 
-        <input
-          type="range"
-          min="0"
-          max="30"
-          className="range range-xs range-primary"
-          onChange={handlePrice}
-        />
+        <Box width={300}>
+          <Slider
+            min={0}
+            max={30}
+            defaultValue={15}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            marks
+            onChange={handlePrice}
+            sx={{
+              width: 300,
+              color: '#b5ba9e',
+            }}
+          />
+        </Box>
         <div className="w-full flex justify-between text-xs px-2">
-          <span>up to 10 €</span>
-          <span>10-19 € </span>
-          <span>20 -29 €</span>
+          <span> 0 €</span>
 
-          <span> over 30 €</span>
+          <span> 30 €</span>
         </div>
         <div>Minimum Experience: </div>
 
@@ -100,16 +110,21 @@ export default function PlantSitterDashboard(props) {
 
         <div className="w-full flex justify-between text-xs px-2">
           <span>0 years</span>
-          <span>5 years</span>
+
           <span> 10 years </span>
         </div>
-        <button
-          onClick={() => {
-            handleFilter('yes');
-          }}
-        >
-          Filter
-        </button>
+        <span>
+          <button className="m-3" onClick={resetlist}>
+            Reset{' '}
+          </button>
+          <button
+            onClick={() => {
+              handleFilter('yes');
+            }}
+          >
+            Filter
+          </button>
+        </span>
       </div>
 
       {filter ? (

@@ -8,12 +8,12 @@ export default function ProfilePlantsitter(props) {
 
   const [district, setDistrict] = useState(props.user.district);
 
-  const [price, setPrice] = useState('1');
+  const [price, setPrice] = useState(1);
   const [plants, setPlants] = useState('1');
   const [experience, setExperience] = useState('1');
-  const [startDate, setStartDate] = useState(props.user.startDate);
-  const [endDate, setEndDate] = useState(props.user.endDate);
-  const [description, setDescription] = useState(props.user.description);
+  const [startDate, setStartDate] = useState('no date');
+  const [endDate, setEndDate] = useState('no date');
+  const [description, setDescription] = useState('no description');
   const [error, setError] = useState();
   const router = useRouter();
   const [role, setRole] = useState(props.user.role);
@@ -92,10 +92,9 @@ export default function ProfilePlantsitter(props) {
           <>
             <p>Plants: {props.user.plants} </p>
             <h4>
-              Your next vacation: {'     '}
-              {dateFormat(props.user.startDate, 'mmmm dS')}
+              Your next vacation: {'     '} {props.user.startDate}
               {' -'}
-              {dateFormat(props.user.endDate, 'mmmm dS yyyy')}{' '}
+              {props.user.endDate}{' '}
             </h4>
             {console.log('userprops', props.user.startDate)}
           </>
