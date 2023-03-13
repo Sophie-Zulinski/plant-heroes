@@ -10,9 +10,11 @@ export default function Matches(props) {
     (user) => user.district === props.user.district,
   );
 
+  const length = usersdistrict.length;
   console.log('props.user.role)', props.user.role);
   console.log('usersrole', usersrole);
-
+  console.log('usersdistrict', usersdistrict.length);
+  console.log('length', length);
   return (
     <>
       <img
