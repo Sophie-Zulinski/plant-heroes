@@ -67,15 +67,15 @@ export default async function RootLayout({ children }) {
                           My Profile
                         </Link>
                         <Link href={`/vacations/${user.username}`}>
-                          Vacations
+                          My Vacations
+                          <span className="badge bg-secondary">1</span>
+                        </Link>
+                        <Link href={`/matches/${user.username}`}>
+                          My Matches
                           <span className="badge bg-secondary">1</span>
                         </Link>
                         <Link href="/">
-                          Inbox
-                          <span className="badge bg-secondary">9</span>
-                        </Link>
-                        <Link href="/">
-                          Favourites
+                          My Favourites
                           <span className="badge bg-secondary">1</span>
                         </Link>
                         <Link href="/logout" prefetch={false}>
