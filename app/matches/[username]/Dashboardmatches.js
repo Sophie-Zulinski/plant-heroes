@@ -39,7 +39,13 @@ export default function Matches(props) {
                 height="300"
               />
 
-              <Link href={`/plantowners/${user.id}`}>
+              <Link
+                href={`/${
+                  props.user.role === 'Plantsitter'
+                    ? 'plantowners'
+                    : 'plantsitters'
+                }/${user.id}`}
+              >
                 <h2>{user.username}</h2>
                 <h4>{user.district}</h4>
                 <div className="flex flex-row">
