@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import formidable from 'formidable';
 import Formidable from 'formidable';
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const endpoint = async (req: NextApiRequest, res: NextApiResponse) => {

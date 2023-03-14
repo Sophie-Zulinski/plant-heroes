@@ -47,35 +47,69 @@ export default function ProfilePlantsitter(props) {
   function handlePlants(x) {
     setPlants(x.target.value);
   }
-  const [result, setResult] = useState('');
-  const handleImageUpload = (event) => {
+
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
+
+  /**
+   * handleOnChange
+   * @description Triggers when the file input changes (ex: when a file is selected)
+   */
+
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  }
+
+  /**
+   * handleOnSubmit
+   * @description Triggers when the main form is submitted
+   */
+
+  async function handleOnSubmit(event) {
     event.preventDefault();
-    const file = event.currentTarget['fileInput'].files[0];
+
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === 'file',
+    );
 
     const formData = new FormData();
-    formData.append('file', file);
 
-    fetch('https://echo-api.3scale.net/', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setResult(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+    for (const file of fileInput.files) {
+      formData.append('file', file);
+    }
+
+    formData.append('upload_preset', 'my-uploads');
+
+    const data = await fetch(
+      'https://api.cloudinary.com/v1_1/dtz9u2nae/image/upload',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then((r) => r.json());
+
+    setImageSrc(data.secure_url);
+
+    setUploadData(data);
+  }
 
   return (
     <>
       <>
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={`/images/${props.user.username}-${props.user.id}.jpg`}
+          src={imageSrc}
           alt={props.user.username}
         />
+
         <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
         <h2>Your current data: </h2>
         <p>Role: {props.user.role} </p>
@@ -91,18 +125,31 @@ export default function ProfilePlantsitter(props) {
         <p>Description: {props.user.description} </p>
         <div className="divider" />
         <h2>Update your data:</h2>
-        <h2>Upload Image:</h2>
-        <form onSubmit={handleImageUpload}>
-          <input id="fileInput" type="file" />
-          <input type="submit" />
-        </form>
-        <br />
-        <br />
-        Result:
-        <br />
-        <pre>{JSON.stringify(result, null, 2)}</pre>
       </>
       <div className="flex flex-row space-x-4">
+        <h1>Image Uploader</h1>
+
+        <p>Upload your image to Cloudinary!</p>
+
+        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+          <p>
+            <input type="file" name="file" />
+          </p>
+
+          <img src={imageSrc} alt="imagesrc" />
+
+          {imageSrc && !uploadData && (
+            <p>
+              <button>Upload Files</button>
+            </p>
+          )}
+          {console.log('imageSrc', imageSrc)}
+          {uploadData && (
+            <code>
+              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+            </code>
+          )}
+        </form>
         <label>
           <input
             type="radio"
