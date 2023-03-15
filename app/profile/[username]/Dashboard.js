@@ -106,7 +106,7 @@ export default function ProfilePlantsitter(props) {
       <>
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={imageSrc}
+          src={props.user.img}
           alt={props.user.username}
         />
 
@@ -181,7 +181,7 @@ export default function ProfilePlantsitter(props) {
       </div>
       <>
         <p>
-          District: {props.user.district}{' '}
+          District*: {props.user.district}{' '}
           <select name="discrict" onClick={handleDistrict}>
             <option value="1010 Vienna">1010 Vienna</option>
             <option value="1020 Vienna">1020 Vienna</option>
@@ -258,6 +258,7 @@ export default function ProfilePlantsitter(props) {
                 role: role,
                 startDate: startDate,
                 endDate: endDate,
+                img: imageSrc,
               }),
             });
             console.log('PROPS', props.user.id);

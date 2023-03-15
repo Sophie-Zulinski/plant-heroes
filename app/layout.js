@@ -45,7 +45,7 @@ export default async function RootLayout({ children }) {
                     {user ? (
                       <img
                         className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                        src={`/images/${user.username}-${user.id}.jpg`}
+                        src={user.img}
                         alt={user.username}
                       />
                     ) : (

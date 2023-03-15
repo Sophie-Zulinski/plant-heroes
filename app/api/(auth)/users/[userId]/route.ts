@@ -16,6 +16,7 @@ const userType = z.object({
   plants: z.string(),
   startDate: z.string(),
   endDate: z.string(),
+  img: z.string(),
 });
 
 export async function GET(
@@ -105,6 +106,7 @@ export async function PUT(
     result.data.plants,
     result.data.startDate,
     result.data.endDate,
+    result.data.img,
   );
 
   return NextResponse.json({ user: newUser });

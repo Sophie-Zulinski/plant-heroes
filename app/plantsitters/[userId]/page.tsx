@@ -42,7 +42,7 @@ export default async function PlantSitter(props: Props) {
   const singleUser: SingleUser = users.find((user) => {
     return user.id === parseInt(props.params.userId);
   });
-
+  console.log('singeUser', singleUser.img);
   console.log('singleUser', singleUser);
   console.log('props', props);
   return (

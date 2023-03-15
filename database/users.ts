@@ -109,6 +109,7 @@ export const getUserByUsername = cache(async (username: string) => {
       plants: string | null;
       start_date: string | null;
       end_date: string | null;
+      img: string | null;
     }[]
   >`
     SELECT
@@ -121,7 +122,8 @@ export const getUserByUsername = cache(async (username: string) => {
       role,
       plants,
       start_date,
-      end_date
+      end_date,
+      img
     FROM
       users
     WHERE
@@ -157,6 +159,7 @@ export const updateUserById = cache(
     plants: string | null,
     start_date: string | null,
     end_date: string | null,
+    img: string | null,
   ) => {
     const [user] = await sql<User[]>`
       UPDATE
@@ -170,7 +173,8 @@ export const updateUserById = cache(
       role= ${role},
       plants= ${plants},
       start_date=${start_date},
-      end_date=${end_date}
+      end_date=${end_date},
+      img=${img}
 
       WHERE
         id = ${id}
@@ -193,11 +197,12 @@ export const deleteUserById = cache(async (id: number) => {
 
 export const getUserBySessionToken = cache(async (token: string) => {
   const [user] = await sql<
-    { id: number; username: string; csrfSecret: string }[]
+    { id: number; username: string; img: string; csrfSecret: string }[]
   >`
     SELECT
       users.id,
       users.username,
+      users.img,
       sessions.csrf_secret
     FROM
       users

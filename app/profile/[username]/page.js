@@ -1,9 +1,5 @@
 import { notFound } from 'next/navigation';
-import {
-  getUserByID,
-  getUserByUsername,
-  getUsers,
-} from '../../../database/users';
+import { getUserByUsername } from '../../../database/users';
 import Dashboard from './Dashboard';
 
 export default async function UserProfile({ params }) {
