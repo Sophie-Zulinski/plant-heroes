@@ -50,7 +50,7 @@ export default function Vacations(props) {
       <h1> Let us know your next vacation, {props.user.username}!</h1>
       <p>Role: {props.user.role} </p>
       <div className="flex flex-row">
-        {props.user.startDate ? (
+        {props.user.startDate !== '1111-11-11' ? (
           <h4>
             Your next vacation: {dateFormat(props.user.startDate, 'mmmm dS')}{' '}
             {'-'}{' '}
@@ -58,7 +58,7 @@ export default function Vacations(props) {
         ) : (
           ''
         )}{' '}
-        {props.user.endDate ? (
+        {props.user.endDate !== '1111-11-11' ? (
           <h4>{dateFormat(props.user.endDate, 'mmmm dS yyyy')} </h4>
         ) : (
           ''

@@ -8,12 +8,12 @@ export default function ProfilePlantsitter(props) {
 
   const [district, setDistrict] = useState(props.user.district);
 
-  const [price, setPrice] = useState(1);
-  const [plants, setPlants] = useState('1');
-  const [experience, setExperience] = useState('1');
+  const [price, setPrice] = useState(0);
+  const [plants, setPlants] = useState('0');
+  const [experience, setExperience] = useState('0');
   const [startDate, setStartDate] = useState('1111-11-11');
   const [endDate, setEndDate] = useState('1111-11-11');
-  const [description, setDescription] = useState('no description');
+  const [description, setDescription] = useState('-');
   const [error, setError] = useState();
   const router = useRouter();
   const [role, setRole] = useState(props.user.role);
@@ -103,181 +103,28 @@ export default function ProfilePlantsitter(props) {
 
   return (
     <>
-      <>
-        <img
-          className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={props.user.img}
-          alt={props.user.username}
-        />
+      <img
+        className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+        src={props.user.img}
+        alt={props.user.username}
+      />
 
-        <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
-        <h2>Your current data: </h2>
-        <p>Role: {props.user.role} </p>
-        <p>District: {props.user.district} </p>
-        {role === 'Plantsitter' ? (
-          <>
-            <p>Price: {props.user.price},- € </p>
-            <p>Experience: {props.user.experience} years </p>
-          </>
-        ) : (
-          ''
-        )}
-        {role === 'Plantowner' ? (
-          <p>Plants: {props.user.plants} plants </p>
-        ) : (
-          ''
-        )}
-        <p>Description: {props.user.description} </p>
-        <div className="divider" />
-        <h2>Update your data:</h2>
-      </>
-      <div className="flex flex-row space-x-4">
-        <h1>Image Uploader</h1>
+      <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
+      <h2>Your current data: </h2>
+      <p>Role: {props.user.role} </p>
+      <p>District: {props.user.district} </p>
+      <p>Price: {props.user.price},- € </p>
+      <p>Experience: {props.user.experience} years </p>
 
-        <p>Upload your image to Cloudinary!</p>
+      {role === 'Plantowner' ? <p>Plants: {props.user.plants} plants </p> : ''}
+      <p>Description: {props.user.description} </p>
 
-        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-          <p>
-            <input type="file" name="file" />
-          </p>
-
-          <img src={imageSrc} alt="imagesrc" />
-
-          {imageSrc && !uploadData && (
-            <p>
-              <button>Upload Files</button>
-            </p>
-          )}
-          {console.log('imageSrc', imageSrc)}
-          {uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
-          )}
-        </form>
-        <label>
-          <input
-            type="radio"
-            name="radio-2"
-            value="Plantsitter"
-            className="radio radio-primary m-1.5 "
-            onClick={handleRole}
-          />{' '}
-          I have a watering can and want to become a plant hero
-        </label>
-        {console.log('role', role)}
-      </div>
-      <div className="flex flex-row space-x-4">
-        <label>
-          <input
-            type="radio"
-            name="radio-2"
-            value="Plantowner"
-            className="radio radio-primary  m-1.5 "
-            onClick={handleRole}
-          />
-          I have a plant and need a plant hero
-        </label>
-      </div>
-      <>
-        <p>
-          District*: {props.user.district}{' '}
-          <select name="discrict" onClick={handleDistrict}>
-            <option value="1010 Vienna">1010 Vienna</option>
-            <option value="1020 Vienna">1020 Vienna</option>
-            <option value="1030 Vienna">1030 Vienna</option>
-            <option value="1040 Vienna">1040 Vienna</option>
-          </select>
-        </p>
-        {role === 'Plantsitter' ? (
-          <>
-            <p>
-              Price:{' '}
-              <input
-                type="number"
-                min="1"
-                max="30"
-                placeholder={props.user.price}
-                onChange={handlePrice}
-              />{' '}
-              ,- €
-            </p>
-            <p>
-              Experience:{' '}
-              <input
-                type="number"
-                placeholder={props.user.experience}
-                min="1"
-                max="10"
-                onChange={handleExperience}
-              />{' '}
-              years
-            </p>
-          </>
-        ) : (
-          ''
-        )}
-        {role === 'Plantowner' ? (
-          <p>
-            Plants:{' '}
-            <input
-              type="number"
-              min="1"
-              max="30"
-              placeholder={props.user.plants}
-              onChange={handlePlants}
-            />{' '}
-            plants
-          </p>
-        ) : (
-          ''
-        )}
-
-        <p>
-          Description:{' '}
-          <input
-            placeholder={props.user.description}
-            onChange={handleDescription}
-          />
-        </p>
-
-        <button
-          onClick={async () => {
-            const response = await fetch(`/api/users/${props.user.id}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                username: props.user.username,
-                district: district,
-                price: price,
-                experience: experience,
-                description: description,
-                plants: plants,
-                role: role,
-                startDate: startDate,
-                endDate: endDate,
-                img: imageSrc,
-              }),
-            });
-            console.log('PROPS', props.user.id);
-            console.log('response', response);
-            const data = await response.json();
-            console.log('data', data);
-            if (data.error) {
-              setError(data.error);
-              return;
-            }
-
-            router.refresh();
-
-            setUser([data.user]);
-          }}
-        >
-          Update Profile
-        </button>
-      </>
+      <a
+        className="bg-primary rounded-lg p-3"
+        href={`/profile/${props.user.username}/update`}
+      >
+        Change profile infos
+      </a>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+import { nullable, z } from 'zod';
 import {
   deleteUserById,
   getUserByID,
@@ -16,7 +16,7 @@ const userType = z.object({
   plants: z.string(),
   startDate: z.string(),
   endDate: z.string(),
-  img: z.string(),
+  img: z.any(),
 });
 
 export async function GET(
