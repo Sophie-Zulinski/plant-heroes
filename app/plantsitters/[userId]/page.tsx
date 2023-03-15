@@ -20,6 +20,7 @@ type SingleUser = {
   price: string;
   experience: string;
   description: string;
+  img: string;
 };
 
 export default async function PlantSitter(props: Props) {
@@ -50,7 +51,7 @@ export default async function PlantSitter(props: Props) {
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center">
           <img
             className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-            src={`/images/${singleUser.username}-${singleUser.id}.jpg`}
+            src={singleUser.img}
             alt={singleUser.username}
           />
 

@@ -137,7 +137,7 @@ export default function PlantSitterDashboard(props) {
               >
                 <Image
                   className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={`/images/${user.username}-${user.id}.jpg`}
+                  src={user.image}
                   alt={user.username}
                   width="300"
                   height="300"

@@ -54,6 +54,7 @@ export type User = {
   plants: string | null;
   start_date: string | null;
   end_date: string | null;
+  img: string | null;
 };
 type UserWithPasswordHash = User & {
   passwordHash: string;

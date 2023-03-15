@@ -11,7 +11,9 @@ export async function up(sql) {
   start_date varchar (15) ,
   end_date varchar (15),
   role varchar(15),
-  plants varchar (10)
+  plants varchar (10),
+  img varchar (120)
+
 )
   `;
 }
