@@ -16,7 +16,7 @@ export default function ProfilePlantsitter(props) {
   const [description, setDescription] = useState('no description');
   const [error, setError] = useState();
   const router = useRouter();
-  const [role, setRole] = useState(props.user.role);
+  const [role, setRole] = useState('');
   function handleRole(x) {
     setRole(x.target.value);
   }

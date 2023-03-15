@@ -11,21 +11,21 @@ export default function Matches(props) {
   );
 
   const length = usersdistrict.length;
-  console.log('props.user.role)', props.user.role);
-  console.log('usersrole', usersrole);
-  console.log('usersdistrict', usersdistrict.length);
-  console.log('length', length);
+
+  console.log('props.user.role', props.user.role);
+  console.log('userrole', usersrole);
+  console.log('props.user.disctrict', props.user.disctrict);
   return (
     <>
       <img
         className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-        src={`/images/${props.user.username}-${props.user.id}.jpg`}
+        src={props.user.img}
         alt={props.user.username}
       />
       <h1> Check out your perfect match, {props.user.username}!</h1>
       <div>We have selected some users, that might be perfect for you </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {usersdistrict.map((user) => {
+        {usersrole.map((user) => {
           return (
             <div
               className="flex flex-row p-5 gap-4 h-max bg-neutral rounded-md mt-5 justify-center items-center "
@@ -33,7 +33,7 @@ export default function Matches(props) {
             >
               <Image
                 className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                src={`/images/${user.username}-${user.id}.jpg`}
+                src={user.img}
                 alt={user.username}
                 width="300"
                 height="300"
@@ -65,6 +65,7 @@ export default function Matches(props) {
                 <h4>Price: {user.price},- €/hour </h4>
                 <h4>{user.plants} plants</h4>
                 <br />
+
                 <button>Check out profile</button>
               </Link>
             </div>

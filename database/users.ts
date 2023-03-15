@@ -161,7 +161,9 @@ export const getUserBySessionToken = cache(async (token: string) => {
       users.id,
       users.username,
       users.img,
-      sessions.csrf_secret
+      sessions.csrf_secret,
+      users.district,
+      users.role
     FROM
       users
     INNER JOIN
