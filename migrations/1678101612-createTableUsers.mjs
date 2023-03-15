@@ -8,9 +8,9 @@ export async function up(sql) {
   price int,
   experience varchar (10),
   description varchar(100),
-  start_date varchar ,
-  end_date varchar,
-  role varchar,
+  start_date varchar (15) ,
+  end_date varchar (15),
+  role varchar(15),
   plants varchar (10)
 )
   `;

@@ -11,8 +11,8 @@ export default function ProfilePlantsitter(props) {
   const [price, setPrice] = useState(1);
   const [plants, setPlants] = useState('1');
   const [experience, setExperience] = useState('1');
-  const [startDate, setStartDate] = useState('no date');
-  const [endDate, setEndDate] = useState('no date');
+  const [startDate, setStartDate] = useState('1111-11-11');
+  const [endDate, setEndDate] = useState('1111-11-11');
   const [description, setDescription] = useState('no description');
   const [error, setError] = useState();
   const router = useRouter();
@@ -122,6 +122,11 @@ export default function ProfilePlantsitter(props) {
         ) : (
           ''
         )}
+        {role === 'Plantowner' ? (
+          <p>Plants: {props.user.plants} plants </p>
+        ) : (
+          ''
+        )}
         <p>Description: {props.user.description} </p>
         <div className="divider" />
         <h2>Update your data:</h2>
@@ -212,6 +217,21 @@ export default function ProfilePlantsitter(props) {
         ) : (
           ''
         )}
+        {role === 'Plantowner' ? (
+          <p>
+            Plants:{' '}
+            <input
+              type="number"
+              min="1"
+              max="30"
+              placeholder={props.user.plants}
+              onChange={handlePlants}
+            />{' '}
+            plants
+          </p>
+        ) : (
+          ''
+        )}
 
         <p>
           Description:{' '}
@@ -236,6 +256,8 @@ export default function ProfilePlantsitter(props) {
                 description: description,
                 plants: plants,
                 role: role,
+                startDate: startDate,
+                endDate: endDate,
               }),
             });
             console.log('PROPS', props.user.id);

@@ -211,14 +211,14 @@ export default function PlantOwnerDashboard(props) {
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
                   <div className="flex flex-row">
-                    {user.startDate ? (
+                    {user.startDate !== null ? (
                       <h4>
                         {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
                       </h4>
                     ) : (
                       ''
                     )}{' '}
-                    {user.endDate ? (
+                    {user.endDate !== null ? (
                       <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
                     ) : (
                       ''
