@@ -3,6 +3,6 @@ import PlantOwnerDashboard from './DashboardPlantowners';
 
 export default async function PlantSitters() {
   const users = await getUsers();
-  console.log(users);
+  console.log('users.plants', users);
   return <PlantOwnerDashboard users={users} />;
 }

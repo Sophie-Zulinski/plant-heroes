@@ -162,17 +162,75 @@ export default function ProfilePlantsitter(props) {
       </div>
       <div className="divider" />
       <>
-        <p>
-          District*: {props.user.district}{' '}
-          <select name="discrict" onClick={handleDistrict}>
-            <option value="1010 Vienna">1010 Vienna</option>
-            <option value="1020 Vienna">1020 Vienna</option>
-            <option value="1030 Vienna">1030 Vienna</option>
-            <option value="1040 Vienna">1040 Vienna</option>
-          </select>
-        </p>
         {role === 'Plantsitter' ? (
           <>
+            <p>
+              District*: {props.user.district}{' '}
+              <select name="discrict" onClick={handleDistrict}>
+                <option value="1010 Vienna">1010 Vienna</option>
+                <option value="1020 Vienna">1020 Vienna</option>
+                <option value="1030 Vienna">1030 Vienna</option>
+                <option value="1040 Vienna">1040 Vienna</option>
+              </select>
+            </p>
+            <>
+              <p>
+                Price:{' '}
+                <input
+                  type="number"
+                  min="1"
+                  max="30"
+                  placeholder={props.user.price}
+                  onChange={handlePrice}
+                />{' '}
+                ,- €
+              </p>
+              <p>
+                Experience:{' '}
+                <input
+                  type="number"
+                  placeholder={props.user.experience}
+                  min="1"
+                  max="10"
+                  onChange={handleExperience}
+                />{' '}
+                years
+              </p>
+              <p>
+                Description:{' '}
+                <input
+                  placeholder={props.user.description}
+                  onChange={handleDescription}
+                />
+              </p>
+            </>
+          </>
+        ) : (
+          ''
+        )}
+        {role === 'Plantowner' ? (
+          <>
+            {' '}
+            <p>
+              District*: {props.user.district}{' '}
+              <select name="discrict" onClick={handleDistrict}>
+                <option value="1010 Vienna">1010 Vienna</option>
+                <option value="1020 Vienna">1020 Vienna</option>
+                <option value="1030 Vienna">1030 Vienna</option>
+                <option value="1040 Vienna">1040 Vienna</option>
+              </select>
+            </p>
+            <p>
+              Plants:{' '}
+              <input
+                type="number"
+                min="1"
+                max="30"
+                placeholder={props.user.plants}
+                onChange={handlePlants}
+              />{' '}
+              plants
+            </p>
             <p>
               Price:{' '}
               <input
@@ -185,43 +243,16 @@ export default function ProfilePlantsitter(props) {
               ,- €
             </p>
             <p>
-              Experience:{' '}
+              Description:{' '}
               <input
-                type="number"
-                placeholder={props.user.experience}
-                min="1"
-                max="10"
-                onChange={handleExperience}
-              />{' '}
-              years
+                placeholder={props.user.description}
+                onChange={handleDescription}
+              />
             </p>
           </>
         ) : (
           ''
         )}
-        {role === 'Plantowner' ? (
-          <p>
-            Plants:{' '}
-            <input
-              type="number"
-              min="1"
-              max="30"
-              placeholder={props.user.plants}
-              onChange={handlePlants}
-            />{' '}
-            plants
-          </p>
-        ) : (
-          ''
-        )}
-
-        <p>
-          Description:{' '}
-          <input
-            placeholder={props.user.description}
-            onChange={handleDescription}
-          />
-        </p>
 
         <a
           className="bg-primary rounded-lg p-3"

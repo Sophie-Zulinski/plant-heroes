@@ -76,9 +76,7 @@ export default async function RootLayout({ children }) {
                         </Link>
                         <Link href={`/matches/${user.username}`}>
                           My Matches
-                          <span className="badge bg-secondary">
-                            <Length user={user} users={users} />
-                          </span>
+                          <span className="badge bg-secondary"></span>
                         </Link>
                         <Link href="/">
                           My Favourites

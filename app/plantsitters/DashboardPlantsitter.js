@@ -74,7 +74,7 @@ export default function PlantSitterDashboard(props) {
           <Slider
             min={0}
             max={30}
-            defaultValue={15}
+            defaultValue={30}
             aria-label="Default"
             valueLabelDisplay="auto"
             marks
@@ -96,7 +96,7 @@ export default function PlantSitterDashboard(props) {
           <Slider
             min={0}
             max={10}
-            defaultValue={5}
+            defaultValue={0}
             aria-label="Default"
             valueLabelDisplay="auto"
             marks
@@ -137,7 +137,7 @@ export default function PlantSitterDashboard(props) {
               >
                 <Image
                   className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={user.image}
+                  src={user.img}
                   alt={user.username}
                   width="300"
                   height="300"
@@ -177,7 +177,7 @@ export default function PlantSitterDashboard(props) {
                   <h4>{user.district}</h4>
 
                   <h4>Price: {user.price},- €/hour </h4>
-                  <h4>Experience {user.experience} years</h4>
+                  <h4>Experience: {user.experience} years</h4>
                   <br />
                   <button>Check out profile</button>
                 </Link>

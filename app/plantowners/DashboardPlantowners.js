@@ -70,7 +70,7 @@ export default function PlantOwnerDashboard(props) {
   function handlePlants(x) {
     setPlants(x.target.value);
   }
-
+  console.log('userspantowners', usersplantowners);
   return (
     <div className="sm:flex flex-row justify-evenly m ">
       <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
@@ -106,7 +106,7 @@ export default function PlantOwnerDashboard(props) {
           <Slider
             min={0}
             max={30}
-            defaultValue={15}
+            defaultValue={0}
             aria-label="Default"
             valueLabelDisplay="auto"
             marks
@@ -128,7 +128,7 @@ export default function PlantOwnerDashboard(props) {
           <Slider
             min={0}
             max={20}
-            defaultValue={5}
+            defaultValue={20}
             aria-label="Default"
             valueLabelDisplay="auto"
             marks
@@ -161,7 +161,7 @@ export default function PlantOwnerDashboard(props) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
       {filter ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {usersfilteredprice.map((user) => {
+          {usersfilteredplants.map((user) => {
             return (
               <div
                 className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
@@ -169,7 +169,7 @@ export default function PlantOwnerDashboard(props) {
               >
                 <Image
                   className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={`/images/${user.username}-${user.id}.jpg`}
+                  src={user.img}
                   alt={user.username}
                   width="300"
                   height="300"
