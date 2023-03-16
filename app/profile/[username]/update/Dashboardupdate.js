@@ -8,12 +8,12 @@ export default function ProfilePlantsitter(props) {
 
   const [district, setDistrict] = useState(props.user.district);
 
-  const [price, setPrice] = useState(1);
-  const [plants, setPlants] = useState('1');
-  const [experience, setExperience] = useState('1');
+  const [price, setPrice] = useState(props.user.price);
+  const [plants, setPlants] = useState(props.user.plants);
+  const [experience, setExperience] = useState(props.user.experience);
   const [startDate, setStartDate] = useState('1111-11-11');
   const [endDate, setEndDate] = useState('1111-11-11');
-  const [description, setDescription] = useState('no description');
+  const [description, setDescription] = useState(props.user.description);
   const [error, setError] = useState();
   const router = useRouter();
   const [role, setRole] = useState('');
@@ -48,8 +48,8 @@ export default function ProfilePlantsitter(props) {
     setPlants(x.target.value);
   }
 
-  const [imageSrc, setImageSrc] = useState();
-  const [uploadData, setUploadData] = useState();
+  const [imageSrc, setImageSrc] = useState(props.user.img);
+  const [uploadData, setUploadData] = useState(props.user.img);
 
   /**
    * handleOnChange
@@ -152,7 +152,7 @@ export default function ProfilePlantsitter(props) {
                   <input type="file" name="file" />
                 </p>
 
-                <img src={imageSrc} alt={imageSrc} />
+                <img src={imageSrc} alt={imageSrc} width={150} />
 
                 {imageSrc && !uploadData && (
                   <p>
@@ -226,7 +226,7 @@ export default function ProfilePlantsitter(props) {
                   <input type="file" name="file" />
                 </p>
 
-                <img src={imageSrc} alt={imageSrc} />
+                <img src={imageSrc} alt={imageSrc} width={150} />
 
                 {imageSrc && !uploadData && (
                   <p>

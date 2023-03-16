@@ -1,3 +1,4 @@
+import dateFormat, { masks } from 'dateformat';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
@@ -85,23 +86,30 @@ export default async function PlantOwners(props: Props) {
             />
           </div>
 
-          <div className="flex flex-row space-x-4">
-            <input type="checkbox" className="checkbox checkbox-primary" />
-            <span>
-              {singleUser.startDate}-{singleUser.endDate}{' '}
-            </span>
+          <div className="flex flex-row">
+            {singleUser.startDate !== '1111-11-11' ? (
+              <h4>
+                {dateFormat(singleUser.startDate, 'mmmm dS')} {'-'}{' '}
+              </h4>
+            ) : (
+              ''
+            )}{' '}
+            {singleUser.endDate !== '1111-11-11' ? (
+              <h4>{dateFormat(singleUser.endDate, 'mmmm dS yyyy')} </h4>
+            ) : (
+              ''
+            )}
           </div>
-
-          <button className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
-            Show more dates
-          </button>
 
           <span>{singleUser.district}</span>
 
-          <span>{singleUser.price},- €</span>
-          <span>{singleUser.experience} years of experience</span>
+          <span>Max. price: {singleUser.price},- €/hour</span>
+          <span>{singleUser.plants} plants</span>
           <span>{singleUser.description}</span>
-          <a href="mailto:sophie.zulinski@gmx.at?&subject=Request from plant heroes &body=Hi, do you want to be my plant hero?">
+          <a
+            className="bg-primary rounded-lg p-3"
+            href="mailto:sophie.zulinski@gmx.at?&subject=Request from plant heroes &body=Hi, do you want to be my plant hero?"
+          >
             Send request
           </a>
         </div>

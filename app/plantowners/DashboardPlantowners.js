@@ -179,8 +179,18 @@ export default function PlantOwnerDashboard(props) {
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
                   <div className="flex flex-row">
-                    <h4>{user.startDate} </h4> {' - '}
-                    <h4>{user.endDate} </h4>
+                    {user.startDate !== '1111-11-11' ? (
+                      <h4>
+                        {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
+                      </h4>
+                    ) : (
+                      ''
+                    )}{' '}
+                    {user.endDate !== '1111-11-11' ? (
+                      <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
+                    ) : (
+                      ''
+                    )}
                   </div>
                   <h4>Price: {user.price},- €/hour </h4>
                   <h4>{user.plants} plants</h4>
@@ -211,14 +221,14 @@ export default function PlantOwnerDashboard(props) {
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
                   <div className="flex flex-row">
-                    {user.startDate !== null ? (
+                    {user.startDate !== '1111-11-11' ? (
                       <h4>
                         {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
                       </h4>
                     ) : (
                       ''
                     )}{' '}
-                    {user.endDate !== null ? (
+                    {user.endDate !== '1111-11-11' ? (
                       <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
                     ) : (
                       ''

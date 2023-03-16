@@ -86,10 +86,15 @@ export default async function PlantSitter(props: Props) {
 
           <span>{singleUser.district}</span>
 
-          <span>{singleUser.price},- €</span>
+          <span>Price: {singleUser.price},- €/hour </span>
           <span>{singleUser.experience} years of experience</span>
           <span>{singleUser.description}</span>
-          <button>Send request</button>
+          <a
+            className="bg-primary rounded-lg p-3"
+            href="mailto:sophie.zulinski@gmx.at?&subject=Request from plant heroes &body=Hi, do you want to be my plant hero?"
+          >
+            Send request
+          </a>
         </div>
       </div>
     </main>
