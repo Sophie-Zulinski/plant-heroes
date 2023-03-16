@@ -2,7 +2,11 @@ import './globals.css';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { getUserBySessionToken, getUsers } from '../database/users';
+import {
+  getUserBySessionToken,
+  getUserByUsername,
+  getUsers,
+} from '../database/users';
 import Length from './matches/[username]/Length';
 
 export const dynamic = 'force-dynamic';
@@ -76,7 +80,9 @@ export default async function RootLayout({ children }) {
                         </Link>
                         <Link href={`/matches/${user.username}`}>
                           My Matches
-                          <span className="badge bg-secondary"></span>
+                          <span className="badge bg-secondary">
+                            <Length user={user} users={users} />
+                          </span>
                         </Link>
                         <Link href="/">
                           My Favourites

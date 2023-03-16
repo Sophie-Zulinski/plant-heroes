@@ -3,6 +3,7 @@ import dateFormat, { masks } from 'dateformat';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+export const dynamic = 'force-dynamic';
 export default function ProfilePlantsitter(props) {
   const [users, setUser] = useState(props);
 

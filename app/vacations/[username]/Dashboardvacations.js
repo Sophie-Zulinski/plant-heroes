@@ -44,7 +44,7 @@ export default function Vacations(props) {
     <>
       <img
         className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-        src={`/images/${props.user.username}-${props.user.id}.jpg`}
+        src={props.user.img}
         alt={props.user.username}
       />
       <h1> Let us know your next vacation, {props.user.username}!</h1>
@@ -87,6 +87,7 @@ export default function Vacations(props) {
               description: props.user.description,
               plants: props.user.plants.toString(),
               role: props.user.role,
+              img: props.user.img,
               startDate: startDate,
               endDate: endDate,
             }),

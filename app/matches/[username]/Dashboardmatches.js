@@ -4,17 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Matches(props) {
-  const usersrole = props.users.filter((user) => user.role !== props.user.role);
-
-  const usersdistrict = usersrole.filter(
+  const usersdistrict = props.users.filter(
     (user) => user.district === props.user.district,
   );
 
-  const length = usersdistrict.length;
+  const usersrole = usersdistrict.filter(
+    (user) => user.role !== props.user.role,
+  );
 
-  console.log('props.user.role', props.user.role);
-  console.log('userrole', usersrole);
-  console.log('props.user.disctrict', props.user.disctrict);
   return (
     <>
       <img
@@ -49,14 +46,14 @@ export default function Matches(props) {
                 <h2>{user.username}</h2>
                 <h4>{user.district}</h4>
                 <div className="flex flex-row">
-                  {user.startDate ? (
+                  {user.startDate !== '1111-11-11' ? (
                     <h4>
                       {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
                     </h4>
                   ) : (
                     ''
                   )}{' '}
-                  {user.endDate ? (
+                  {user.endDate !== '1111-11-11' ? (
                     <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
                   ) : (
                     ''

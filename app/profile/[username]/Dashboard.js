@@ -3,9 +3,10 @@ import dateFormat, { masks } from 'dateformat';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+export const dynamic = 'force-dynamic';
 export default function ProfilePlantsitter(props) {
   const [role, setRole] = useState(props.user.role);
-
+  const router = useRouter();
   /**
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
@@ -25,11 +26,11 @@ export default function ProfilePlantsitter(props) {
       />
 
       <h1> Welcome to Plant Heroes, {props.user.username}!</h1>
-      <h2>Your current data: </h2>
-      <p>Role: {props.user.role} </p>
-
+      <h2>Your current profile infos: </h2>
+      {role === null ? 'No infos yet' : ''}
       {role === 'Plantsitter' ? (
         <>
+          <p>Role: {props.user.role} </p>
           <p>District: {props.user.district} </p>
           <p>Experience: {props.user.experience} years </p>
           <p>Price: {props.user.price},- € </p>
@@ -41,6 +42,7 @@ export default function ProfilePlantsitter(props) {
 
       {role === 'Plantowner' ? (
         <>
+          <p>Role: {props.user.role} </p>
           <p>District: {props.user.district} </p>
           <p>Plants: {props.user.plants} plants </p>
           <p>Price: {props.user.price},- € </p>

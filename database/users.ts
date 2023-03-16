@@ -196,13 +196,22 @@ export const deleteUserById = cache(async (id: number) => {
 
 export const getUserBySessionToken = cache(async (token: string) => {
   const [user] = await sql<
-    { id: number; username: string; img: string | null; csrfSecret: string }[]
+    {
+      id: number;
+      username: string;
+      img: string | null;
+      district: string;
+      role: string;
+      csrfSecret: string;
+    }[]
   >`
     SELECT
       users.id,
       users.username,
       sessions.csrf_secret,
-      img
+      img,
+      users.district,
+      users.role
     FROM
       users
     INNER JOIN
