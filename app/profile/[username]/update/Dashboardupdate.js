@@ -113,29 +113,6 @@ export default function ProfilePlantsitter(props) {
         <h2>Update your data:</h2>
       </>
 
-      <div>Upload your profile image</div>
-      <div className="flex flex-col space-x-4">
-        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-          <p>
-            <input type="file" name="file" />
-          </p>
-
-          <img src={imageSrc} alt={imageSrc} />
-
-          {imageSrc && !uploadData && (
-            <p>
-              <button>Upload Files</button>
-            </p>
-          )}
-          {console.log('imageSrc', imageSrc)}
-          {/*{uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
-          )}*/}
-        </form>
-        <div className="divider" />
-      </div>
       <label>
         <input
           type="radio"
@@ -164,6 +141,33 @@ export default function ProfilePlantsitter(props) {
       <>
         {role === 'Plantsitter' ? (
           <>
+            <div>Upload your profile image</div>
+            <div className="flex flex-col space-x-4">
+              <form
+                method="post"
+                onChange={handleOnChange}
+                onSubmit={handleOnSubmit}
+              >
+                <p>
+                  <input type="file" name="file" />
+                </p>
+
+                <img src={imageSrc} alt={imageSrc} />
+
+                {imageSrc && !uploadData && (
+                  <p>
+                    <button>Upload Files</button>
+                  </p>
+                )}
+                {console.log('imageSrc', imageSrc)}
+                {/*{uploadData && (
+            <code>
+              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+            </code>
+          )}*/}
+              </form>
+              <div className="divider" />
+            </div>
             <p>
               District*: {props.user.district}{' '}
               <select name="discrict" onClick={handleDistrict}>
@@ -211,6 +215,33 @@ export default function ProfilePlantsitter(props) {
         {role === 'Plantowner' ? (
           <>
             {' '}
+            <div>Upload a picture of your favourite plant</div>
+            <div className="flex flex-col space-x-4">
+              <form
+                method="post"
+                onChange={handleOnChange}
+                onSubmit={handleOnSubmit}
+              >
+                <p>
+                  <input type="file" name="file" />
+                </p>
+
+                <img src={imageSrc} alt={imageSrc} />
+
+                {imageSrc && !uploadData && (
+                  <p>
+                    <button>Upload Files</button>
+                  </p>
+                )}
+                {console.log('imageSrc', imageSrc)}
+                {/*{uploadData && (
+            <code>
+              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+            </code>
+          )}*/}
+              </form>
+              <div className="divider" />
+            </div>
             <p>
               District*: {props.user.district}{' '}
               <select name="discrict" onClick={handleDistrict}>
