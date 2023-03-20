@@ -51,12 +51,17 @@ export default async function PlantOwners(props: Props) {
     <main className="min-h-screen">
       <div className="flex justify-center items-center ">
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center">
-          <img
-            className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-            src={singleUser.img}
-            alt={singleUser.username}
-          />
-
+          {singleUser.img ? (
+            <Image
+              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+              src={singleUser.img}
+              alt={singleUser.username}
+              width="300"
+              height="300"
+            />
+          ) : (
+            ''
+          )}{' '}
           <h1>{singleUser.username}</h1>
           <div className="rating">
             <input
@@ -85,7 +90,6 @@ export default async function PlantOwners(props: Props) {
               className="mask mask-star-2 bg-orange-400"
             />
           </div>
-
           <div className="flex flex-row">
             {singleUser.startDate !== '1111-11-11' ? (
               <h4>
@@ -100,9 +104,7 @@ export default async function PlantOwners(props: Props) {
               ''
             )}
           </div>
-
           <span>{singleUser.district}</span>
-
           <span>Max. price: {singleUser.price},- €/hour</span>
           <span>{singleUser.plants} plants</span>
           <span>{singleUser.description}</span>

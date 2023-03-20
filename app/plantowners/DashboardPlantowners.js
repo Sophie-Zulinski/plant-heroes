@@ -167,14 +167,17 @@ export default function PlantOwnerDashboard(props) {
                 className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
                 key={`user-${user.id}`}
               >
-                <Image
-                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={user.img}
-                  alt={user.username}
-                  width="300"
-                  height="300"
-                />
-
+                {user.img ? (
+                  <Image
+                    className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                    src={user.img}
+                    alt={user.username}
+                    width="300"
+                    height="300"
+                  />
+                ) : (
+                  ''
+                )}{' '}
                 <Link href={`/plantowners/${user.id}`}>
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>
@@ -209,14 +212,17 @@ export default function PlantOwnerDashboard(props) {
                 className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
                 key={`user-${user.id}`}
               >
-                <Image
-                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={user.img}
-                  alt={user.username}
-                  width="300"
-                  height="300"
-                />
-
+                {user.img ? (
+                  <Image
+                    className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                    src={user.img}
+                    alt={user.username}
+                    width="300"
+                    height="300"
+                  />
+                ) : (
+                  ''
+                )}{' '}
                 <Link href={`/plantowners/${user.id}`}>
                   <h2>{user.username}</h2>
                   <h4>{user.district}</h4>

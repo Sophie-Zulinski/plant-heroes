@@ -125,7 +125,6 @@ export default function ProfilePlantsitter(props) {
         I have a watering can and want to become a plant hero
       </label>
       {console.log('role', role)}
-
       <div className="flex flex-row space-x-4">
         <label>
           <input
@@ -139,7 +138,11 @@ export default function ProfilePlantsitter(props) {
         </label>
       </div>
       <div className="divider" />
-      <>
+      <form
+        action={`/profile/${props.user.username}`}
+        method="POST"
+        className=" flex flex-col  items-center my-8 "
+      >
         {role === 'Plantsitter' ? (
           <>
             <div>Upload your profile image</div>
@@ -161,54 +164,62 @@ export default function ProfilePlantsitter(props) {
                   </p>
                 )}
                 {console.log('imageSrc', imageSrc)}
-                {/*{uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
-          )}*/}
               </form>
               <div className="divider" />
             </div>
+
             <p>
-              District*: {props.user.district}{' '}
-              <select name="discrict" onClick={handleDistrict}>
+              District:
+              <select
+                name="discrict"
+                id="disctrict"
+                onClick={handleDistrict}
+                required
+              >
+                <option value="">None</option>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
                 <option value="1030 Vienna">1030 Vienna</option>
                 <option value="1040 Vienna">1040 Vienna</option>
               </select>
+              *
             </p>
-            <>
-              <p>
-                Price:{' '}
-                <input
-                  type="number"
-                  min="1"
-                  max="30"
-                  placeholder={props.user.price}
-                  onChange={handlePrice}
-                />{' '}
-                ,- €
-              </p>
-              <p>
-                Experience:{' '}
-                <input
-                  type="number"
-                  placeholder={props.user.experience}
-                  min="1"
-                  max="10"
-                  onChange={handleExperience}
-                />{' '}
-                years
-              </p>
-              <p>
-                Description:{' '}
-                <input
-                  placeholder={props.user.description}
-                  onChange={handleDescription}
-                />
-              </p>
-            </>
+            <p>
+              Minimum price:{' '}
+              <input
+                className="rounded-lg border-white mt-5"
+                type="number"
+                min="1"
+                max="30"
+                placeholder={props.user.price}
+                onChange={handlePrice}
+                required
+              />{' '}
+              ,- € *
+            </p>
+            <p>
+              Experience:{' '}
+              <input
+                className="rounded-lg border-white my-5"
+                type="number"
+                placeholder={props.user.experience}
+                min="1"
+                max="10"
+                onChange={handleExperience}
+                required
+              />{' '}
+              years*
+            </p>
+            <p>
+              Description:{' '}
+              <input
+                className=" mb-5"
+                placeholder={props.user.description}
+                onChange={handleDescription}
+                required
+              />
+              *
+            </p>
           </>
         ) : (
           ''
@@ -244,49 +255,64 @@ export default function ProfilePlantsitter(props) {
               <div className="divider" />
             </div>
             <p>
-              District*: {props.user.district}{' '}
-              <select name="discrict" onClick={handleDistrict}>
+              District:
+              <select
+                name="discrict"
+                id="disctrict"
+                onClick={handleDistrict}
+                required
+              >
+                <option value="">None</option>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
                 <option value="1030 Vienna">1030 Vienna</option>
                 <option value="1040 Vienna">1040 Vienna</option>
               </select>
+              *
             </p>
             <p>
               Plants:{' '}
               <input
+                className="rounded-lg border-white mt-5"
                 type="number"
                 min="1"
                 max="30"
                 placeholder={props.user.plants}
                 onChange={handlePlants}
+                required
               />{' '}
-              plants
+              plants*
             </p>
             <p>
-              Price:{' '}
+              Maximum price:{' '}
               <input
+                className="rounded-lg border-white my-5"
                 type="number"
                 min="1"
                 max="30"
                 placeholder={props.user.price}
                 onChange={handlePrice}
+                required
               />{' '}
-              ,- €
+              ,- € *
             </p>
             <p>
               Description:{' '}
               <input
+                className=" mb-5"
                 placeholder={props.user.description}
                 onChange={handleDescription}
+                required
               />
+              *
             </p>
           </>
         ) : (
           ''
         )}
-
-        <a
+        <input
+          type="submit"
+          value=" Update Profile"
           className="bg-primary rounded-lg p-3"
           onClick={async () => {
             const response = await fetch(`/api/users/${props.user.id}`, {
@@ -320,11 +346,8 @@ export default function ProfilePlantsitter(props) {
 
             setUser([data.user]);
           }}
-          href={`/profile/${props.user.username}`}
-        >
-          Update Profile
-        </a>
-      </>
+        />
+      </form>
     </>
   );
 }
