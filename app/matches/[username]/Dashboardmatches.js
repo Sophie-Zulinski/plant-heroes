@@ -14,17 +14,14 @@ export default function Matches(props) {
 
   return (
     <>
-      {props.user.img ? (
-        <Image
-          className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={props.user.img}
-          alt={props.user.username}
-          width="300"
-          height="300"
-        />
-      ) : (
-        ''
-      )}{' '}
+      <Image
+        className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+        src={props.user.img ? props.user.img : '/images/pic07.jpg'}
+        alt={props.user.username}
+        width="300"
+        height="300"
+      />
+
       <h1> Check out your perfect match, {props.user.username}!</h1>
       <div>We have selected some users, that might be perfect for you </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -34,17 +31,14 @@ export default function Matches(props) {
               className="flex flex-row p-5 gap-4 h-max bg-neutral rounded-md mt-5 justify-center items-center "
               key={`user-${user.id}`}
             >
-              {user.img ? (
-                <Image
-                  className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                  src={user.img}
-                  alt={user.username}
-                  width="300"
-                  height="300"
-                />
-              ) : (
-                ''
-              )}{' '}
+              <Image
+                className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                src={user.img ? user.img : '/images/pic07.jpg'}
+                alt={user.username}
+                width="300"
+                height="300"
+              />
+
               <Link
                 href={`/${
                   props.user.role === 'Plantsitter'

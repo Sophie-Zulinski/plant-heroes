@@ -3,26 +3,13 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
-import { getUsers } from '../../../database/users';
+import { getUsers, User } from '../../../database/users';
 import { createTokenFromSecret } from '../../../utils/csrf';
 
 type Props = {
   params: {
     userId: string;
   };
-};
-
-type SingleUser = {
-  id: number;
-  username: string;
-  startDate: string;
-  endDate: string;
-  district: string;
-  price: string;
-  experience: string;
-  description: string;
-  img: string;
-  plants: string;
 };
 
 export default async function PlantOwners(props: Props) {
@@ -41,7 +28,7 @@ export default async function PlantOwners(props: Props) {
 
   const csrfToken = createTokenFromSecret(session.csrfSecret);
   const users = await getUsers();
-  const singleUser: SingleUser = users.find((user) => {
+  const singleUser: User = users.find((user) => {
     return user.id === parseInt(props.params.userId);
   });
   console.log('singeUser', singleUser.img);
@@ -51,17 +38,13 @@ export default async function PlantOwners(props: Props) {
     <main className="min-h-screen">
       <div className="flex justify-center items-center ">
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center">
-          {singleUser.img ? (
-            <Image
-              className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-              src={singleUser.img}
-              alt={singleUser.username}
-              width="300"
-              height="300"
-            />
-          ) : (
-            ''
-          )}{' '}
+          <Image
+            className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+            src={singleUser.img ? singleUser.img : '/images/pic07.jpg'}
+            alt={singleUser.username}
+            width="300"
+            height="300"
+          />{' '}
           <h1>{singleUser.username}</h1>
           <div className="rating">
             <input

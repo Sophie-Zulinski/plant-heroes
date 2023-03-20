@@ -107,7 +107,7 @@ export default function ProfilePlantsitter(props) {
       <>
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={props.user.img}
+          src={props.user.img ? props.user.img : '/images/pic07.jpg'}
           alt={props.user.username}
         />
 
@@ -145,7 +145,7 @@ export default function ProfilePlantsitter(props) {
       >
         {role === 'Plantsitter' ? (
           <>
-            <div>Upload your profile image</div>
+            <div>Upload a profile of yourself</div>
             <div className="flex flex-col space-x-4">
               <form
                 method="post"

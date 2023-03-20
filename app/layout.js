@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import './globals.css';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { cookies } from 'next/headers';
@@ -52,7 +53,7 @@ export default async function RootLayout({ children }) {
                     {user ? (
                       <img
                         className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                        src={user.img}
+                        src={user.img ? user.img : '/images/pic07.jpg'}
                         alt={user.username}
                       />
                     ) : (
