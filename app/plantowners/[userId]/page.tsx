@@ -8,8 +8,8 @@ import { createTokenFromSecret } from '../../../utils/csrf';
 
 type Props = {
   params: {
-    userId: string;
-  };
+    userId: string,
+  },
 };
 
 export default async function PlantOwners(props: Props) {

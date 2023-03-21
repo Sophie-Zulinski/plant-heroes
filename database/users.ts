@@ -18,7 +18,7 @@ type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
-// get all animals
+// get all users
 export const getUsers = cache(async () => {
   const users = await sql<User[]>`
     SELECT * FROM users

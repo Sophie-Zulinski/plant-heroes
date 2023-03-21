@@ -33,6 +33,10 @@ export default async function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/images/icon-apple-touch.png" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
 
       <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed ">

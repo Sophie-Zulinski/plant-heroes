@@ -11,7 +11,8 @@
     "**/*.mjs",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    "app/profile/[username]/Registerform.tsx"
+    "app/profile/[username]/Registerform.tsx",
+    "app/plantowners/[userId]/page,js"
   ],
   "compilerOptions": {
     "jsx": "preserve",
