@@ -3,13 +3,14 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
-import { getUsers, User } from '../../../database/users';
+import { getUserBySessionToken, getUsers, User } from '../../../database/users';
 import { createTokenFromSecret } from '../../../utils/csrf';
+import Dashboard from './Dashboardfavourites';
 
 type Props = {
   params: {
-    userId: string,
-  },
+    userId: string;
+  };
 };
 
 export default async function PlantOwners(props: Props) {
@@ -25,6 +26,20 @@ export default async function PlantOwners(props: Props) {
   if (!session) {
     redirect(`/login?returnTo=/plantsowners/`);
   }
+
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  // 2. validate that session
+  // 3. get the user profile matching the session
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
+  // if user is not undefined, the person is logged in
+  // if user is undefined, the person is logged out
+
+  console.log('userplantownerspage', user);
 
   const csrfToken = createTokenFromSecret(session.csrfSecret);
   const users = await getUsers();
@@ -97,6 +112,7 @@ export default async function PlantOwners(props: Props) {
           >
             Send request
           </a>
+          <Dashboard singleUser={singleUser} user={user} />
         </div>
       </div>
     </main>

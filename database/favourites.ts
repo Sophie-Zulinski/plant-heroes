@@ -27,12 +27,12 @@ export const getFavouriteID = cache(async (user_giver_id: number) => {
 });
 
 export const createFavourite = cache(
-  async (id: number, user_giver_id: number, user_receiver_id: number) => {
+  async (user_giver_id: number, user_receiver_id: number) => {
     const [favourite] = await sql<Favourites[]>`
       INSERT INTO favourites
-        (id, user_giver_id, user_receiver_id)
+        (user_giver_id, user_receiver_id)
       VALUES
-        (${id}, ${user_giver_id}, ${user_receiver_id})
+        (${user_giver_id}, ${user_receiver_id})
       RETURNING
         id,
         user_giver_id,

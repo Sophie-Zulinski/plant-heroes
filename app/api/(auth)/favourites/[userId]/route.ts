@@ -53,7 +53,6 @@ export async function POST(request: NextRequest) {
   }
 
   const newUser = await createFavourite(
-    result.data.id,
     result.data.user_giver_id,
     result.data.user_receiver_id,
   );

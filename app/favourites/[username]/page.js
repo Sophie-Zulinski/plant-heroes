@@ -14,16 +14,14 @@ export default async function Favourites({ params }) {
   const receiver = favourites.find((user) => {
     return user.userGiverId === singleUser.id;
   });
-  console.log('favourites', favourites);
 
   console.log('receiver', receiver);
 
-  console.log('singleUser', singleUser);
-  console.log('singleUser.userReceiverId', receiver.userReceiverId);
-
   const userfavourites = users.filter(
-    (user) => user.id === receiver.userReceiverId,
+    (users) => users.id === receiver.userReceiverId,
   );
+
+  console.log('favourites', favourites);
   return (
     <main className="min-h-screen">
       <div className="flex justify-center items-center ">
