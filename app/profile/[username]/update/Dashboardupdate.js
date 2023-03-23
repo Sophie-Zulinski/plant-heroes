@@ -136,7 +136,6 @@ export default function ProfilePlantsitter(props) {
         I want to become a plant hero
       </label>
       {console.log('role', role)}
-
       <div className="divider" />
       <>
         {role === 'Plantsitter' ? (
@@ -163,6 +162,43 @@ export default function ProfilePlantsitter(props) {
               </form>
               <div className="divider" />
             </div>
+          </>
+        ) : (
+          ''
+        )}
+        {role === 'Plantowner' ? (
+          <>
+            <div>Upload a picture of your favourite plant</div>
+            <div className="flex flex-col space-x-4">
+              <form
+                method="post"
+                onChange={handleOnChange}
+                onSubmit={handleOnSubmit}
+              >
+                <div>
+                  <input type="file" name="file" />
+                </div>
+
+                <img src={imageSrc} alt={imageSrc} width={150} />
+
+                {imageSrc && !uploadData && (
+                  <p>
+                    <button>Upload Files</button>
+                  </p>
+                )}
+                {console.log('imageSrc', imageSrc)}
+              </form>
+              <div className="divider" />
+            </div>
+          </>
+        ) : (
+          ''
+        )}
+      </>
+
+      <form action={`/profile/${props.user.username}`} method="post">
+        {role === 'Plantsitter' ? (
+          <>
             <p>
               District*:{' '}
               <select name="discrict" onClick={handleDistrict}>
@@ -182,6 +218,7 @@ export default function ProfilePlantsitter(props) {
                   max="30"
                   placeholder={props.user.price}
                   onChange={handlePrice}
+                  required
                 />{' '}
                 ,- €
               </div>
@@ -211,29 +248,6 @@ export default function ProfilePlantsitter(props) {
         )}
         {role === 'Plantowner' ? (
           <>
-            {' '}
-            <div>Upload a picture of your favourite plant</div>
-            <div className="flex flex-col space-x-4">
-              <form
-                method="post"
-                onChange={handleOnChange}
-                onSubmit={handleOnSubmit}
-              >
-                <div>
-                  <input type="file" name="file" />
-                </div>
-
-                <img src={imageSrc} alt={imageSrc} width={150} />
-
-                {imageSrc && !uploadData && (
-                  <p>
-                    <button>Upload Files</button>
-                  </p>
-                )}
-                {console.log('imageSrc', imageSrc)}
-              </form>
-              <div className="divider" />
-            </div>
             <p>
               District*:{' '}
               <select name="discrict" onClick={handleDistrict}>
@@ -279,7 +293,7 @@ export default function ProfilePlantsitter(props) {
           ''
         )}
 
-        <a
+        <button
           className="bg-primary rounded-lg p-3"
           onClick={async () => {
             const response = await fetch(`/api/users/${props.user.id}`, {
@@ -313,11 +327,10 @@ export default function ProfilePlantsitter(props) {
 
             setUser([data.user]);
           }}
-          href={`/profile/${props.user.username}`}
         >
           Update Profile
-        </a>
-      </>
+        </button>
+      </form>
     </>
   );
 }
