@@ -24,7 +24,7 @@ export default function Home() {
                   className="radio radio-primary m-1.5 "
                   onClick={handleRole}
                 />{' '}
-                I have a plant and need a plant hero
+                I'm going on vacation and need a plant hero
               </label>
               {console.log('role', role)}
             </div>
@@ -39,7 +39,7 @@ export default function Home() {
                     onClick={handleRole}
                   />
                 </a>
-                I have a watering can and want to become a plant hero
+                I want to become a plant hero
               </label>
             </div>
           </div>

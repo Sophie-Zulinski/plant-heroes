@@ -72,9 +72,13 @@ export default async function RootLayout({ children }) {
                         >
                           My Profile
                         </Link>
-                        <Link href={`/vacations/${user.username}`}>
-                          My Vacations
-                        </Link>
+                        {user.role === 'Plantowner' ? (
+                          <Link href={`/vacations/${user.username}`}>
+                            My Vacations
+                          </Link>
+                        ) : (
+                          ''
+                        )}
                         <Link href={`/matches/${user.username}`}>
                           My Matches
                           <span className="badge bg-secondary">

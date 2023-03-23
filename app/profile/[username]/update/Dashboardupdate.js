@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export const dynamic = 'force-dynamic';
 export default function ProfilePlantsitter(props) {
-  const [users, setUser] = useState(props);
+  const [user, setUser] = useState(props);
 
   const [district, setDistrict] = useState(props.user.district);
 
@@ -113,19 +113,6 @@ export default function ProfilePlantsitter(props) {
 
         <h2>Update your data:</h2>
       </>
-
-      <label>
-        <input
-          type="radio"
-          name="radio-2"
-          value="Plantsitter"
-          className="radio radio-primary m-1.5 "
-          onClick={handleRole}
-        />{' '}
-        I have a watering can and want to become a plant hero
-      </label>
-      {console.log('role', role)}
-
       <div className="flex flex-row space-x-4">
         <label>
           <input
@@ -135,23 +122,35 @@ export default function ProfilePlantsitter(props) {
             className="radio radio-primary  m-1.5 "
             onClick={handleRole}
           />
-          I have a plant and need a plant hero
+          I need a plant hero
         </label>
       </div>
+      <label>
+        <input
+          type="radio"
+          name="radio-2"
+          value="Plantsitter"
+          className="radio radio-primary m-1.5 "
+          onClick={handleRole}
+        />{' '}
+        I want to become a plant hero
+      </label>
+      {console.log('role', role)}
+
       <div className="divider" />
       <>
         {role === 'Plantsitter' ? (
           <>
-            <div>Upload your profile image</div>
+            <div>Upload a picture of yourself</div>
             <div className="flex flex-col space-x-4">
               <form
                 method="post"
                 onChange={handleOnChange}
                 onSubmit={handleOnSubmit}
               >
-                <p>
+                <div>
                   <input type="file" name="file" />
-                </p>
+                </div>
 
                 <img src={imageSrc} alt={imageSrc} width={150} />
 
@@ -165,7 +164,7 @@ export default function ProfilePlantsitter(props) {
               <div className="divider" />
             </div>
             <p>
-              District*: {props.user.district}{' '}
+              District*:{' '}
               <select name="discrict" onClick={handleDistrict}>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
@@ -174,9 +173,10 @@ export default function ProfilePlantsitter(props) {
               </select>
             </p>
             <>
-              <p>
-                Price:{' '}
+              <div>
+                Price*:{' '}
                 <input
+                  className="rounded-lg border-white mt-4"
                   type="number"
                   min="1"
                   max="30"
@@ -184,10 +184,11 @@ export default function ProfilePlantsitter(props) {
                   onChange={handlePrice}
                 />{' '}
                 ,- €
-              </p>
-              <p>
-                Experience:{' '}
+              </div>
+              <div>
+                Experience*:{' '}
                 <input
+                  className="rounded-lg border-white my-4"
                   type="number"
                   placeholder={props.user.experience}
                   min="1"
@@ -195,14 +196,14 @@ export default function ProfilePlantsitter(props) {
                   onChange={handleExperience}
                 />{' '}
                 years
-              </p>
-              <p>
-                Description:{' '}
-                <input
+              </div>
+              Describe yourself a little bit*:{' '}
+              <div>
+                <textarea
                   placeholder={props.user.description}
                   onChange={handleDescription}
                 />
-              </p>
+              </div>
             </>
           </>
         ) : (
@@ -218,9 +219,9 @@ export default function ProfilePlantsitter(props) {
                 onChange={handleOnChange}
                 onSubmit={handleOnSubmit}
               >
-                <p>
+                <div>
                   <input type="file" name="file" />
-                </p>
+                </div>
 
                 <img src={imageSrc} alt={imageSrc} width={150} />
 
@@ -234,7 +235,7 @@ export default function ProfilePlantsitter(props) {
               <div className="divider" />
             </div>
             <p>
-              District*: {props.user.district}{' '}
+              District*:{' '}
               <select name="discrict" onClick={handleDistrict}>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
@@ -242,9 +243,10 @@ export default function ProfilePlantsitter(props) {
                 <option value="1040 Vienna">1040 Vienna</option>
               </select>
             </p>
-            <p>
-              Plants:{' '}
+            <div>
+              Plants*:{' '}
               <input
+                className="rounded-lg border-white mt-4"
                 type="number"
                 min="1"
                 max="30"
@@ -252,10 +254,11 @@ export default function ProfilePlantsitter(props) {
                 onChange={handlePlants}
               />{' '}
               plants
-            </p>
-            <p>
-              Price:{' '}
+            </div>
+            <div>
+              Price*:{' '}
               <input
+                className="rounded-lg border-white my-4"
                 type="number"
                 min="1"
                 max="30"
@@ -263,14 +266,14 @@ export default function ProfilePlantsitter(props) {
                 onChange={handlePrice}
               />{' '}
               ,- €
-            </p>
-            <p>
-              Description:{' '}
-              <input
+            </div>
+            Describe your plants a little bit*:{' '}
+            <div>
+              <textarea
                 placeholder={props.user.description}
                 onChange={handleDescription}
               />
-            </p>
+            </div>
           </>
         ) : (
           ''

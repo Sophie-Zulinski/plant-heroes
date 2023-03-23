@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
-    console.log('erro.issues', result.error.issues);
+    console.log('error.issues', result.error.issues);
 
     return NextResponse.json(
       {
