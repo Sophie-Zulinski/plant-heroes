@@ -13,7 +13,7 @@ export default function PlantSitterDashboard(props) {
 
   const [price, setPrice] = useState('');
   const [experience, setExperience] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const router = useRouter();
 
   const usersplantsitters = props.users.filter(

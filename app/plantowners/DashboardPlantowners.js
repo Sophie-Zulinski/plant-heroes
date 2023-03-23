@@ -17,7 +17,7 @@ export default function PlantOwnerDashboard(props) {
 
   const [price, setPrice] = useState('');
   const [plants, setPlants] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const router = useRouter();
 
   const usersplantowners = props.users.filter(
@@ -27,7 +27,6 @@ export default function PlantOwnerDashboard(props) {
   const usersfiltereddistrict = usersplantowners.filter(
     (user) => user.district === district,
   );
-  // <PlantSitterDashboard district={user.district} />
 
   const usersfilteredstartdate = usersfiltereddistrict.filter(
     (user) => user.startDate <= startDate,

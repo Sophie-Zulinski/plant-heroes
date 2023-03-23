@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-syntax
 'use client';
 
 import { useState } from 'react';

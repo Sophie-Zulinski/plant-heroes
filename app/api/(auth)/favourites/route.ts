@@ -11,7 +11,6 @@ const userType = z.object({
 });
 
 export async function GET(request: NextRequest) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { searchParams } = new URL(request.url);
 
   const favourites = await getFavourites();

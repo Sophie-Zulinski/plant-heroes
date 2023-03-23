@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import './globals.css';
 import { cookies } from 'next/headers';
 import Link from 'next/link';

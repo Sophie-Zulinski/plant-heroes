@@ -4,9 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Vacations(props) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [users, setUsers] = useState(props);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [error, setError] = useState();
   const router = useRouter();
 
