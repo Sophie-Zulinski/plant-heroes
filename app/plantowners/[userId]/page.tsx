@@ -1,4 +1,4 @@
-import dateFormat, { masks } from 'dateformat';
+import dateFormat from 'dateformat';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
@@ -24,7 +24,7 @@ export default async function PlantOwners(props: Props) {
   // for example you may also check if session user is an admin role
 
   if (!session) {
-    redirect(`/login?returnTo=/plantowners/`);
+    redirect(`/login?returnTo=/plantsowners/`);
   }
 
   const cookieStore = cookies();

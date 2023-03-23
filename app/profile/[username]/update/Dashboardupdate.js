@@ -1,6 +1,5 @@
 'use client';
-import { id } from 'date-fns/locale';
-import dateFormat, { masks } from 'dateformat';
+
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -108,7 +107,7 @@ export default function ProfilePlantsitter(props) {
       <>
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-          src={props.user.img ? props.user.img : '/images/pic07.jpg'}
+          src={props.user.img}
           alt={props.user.username}
         />
 
@@ -126,6 +125,7 @@ export default function ProfilePlantsitter(props) {
         I have a watering can and want to become a plant hero
       </label>
       {console.log('role', role)}
+
       <div className="flex flex-row space-x-4">
         <label>
           <input
@@ -139,14 +139,10 @@ export default function ProfilePlantsitter(props) {
         </label>
       </div>
       <div className="divider" />
-      <form
-        action={`/profile/${props.user.username}`}
-        method="POST"
-        className=" flex flex-col  items-center my-8 "
-      >
+      <>
         {role === 'Plantsitter' ? (
           <>
-            <div>Upload a profile of yourself</div>
+            <div>Upload your profile image</div>
             <div className="flex flex-col space-x-4">
               <form
                 method="post"
@@ -168,59 +164,46 @@ export default function ProfilePlantsitter(props) {
               </form>
               <div className="divider" />
             </div>
-
             <p>
-              District:
-              <select
-                name="discrict"
-                id="disctrict"
-                onClick={handleDistrict}
-                required
-              >
-                <option value="">None</option>
+              District*: {props.user.district}{' '}
+              <select name="discrict" onClick={handleDistrict}>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
                 <option value="1030 Vienna">1030 Vienna</option>
                 <option value="1040 Vienna">1040 Vienna</option>
               </select>
-              *
             </p>
-            <p>
-              Minimum price:{' '}
-              <input
-                className="rounded-lg border-white mt-5"
-                type="number"
-                min="1"
-                max="30"
-                placeholder={props.user.price}
-                onChange={handlePrice}
-                required
-              />{' '}
-              ,- € *
-            </p>
-            <p>
-              Experience:{' '}
-              <input
-                className="rounded-lg border-white my-5"
-                type="number"
-                placeholder={props.user.experience}
-                min="1"
-                max="10"
-                onChange={handleExperience}
-                required
-              />{' '}
-              years*
-            </p>
-            <p>
-              Description:{' '}
-              <input
-                className=" mb-5"
-                placeholder={props.user.description}
-                onChange={handleDescription}
-                required
-              />
-              *
-            </p>
+            <>
+              <p>
+                Price:{' '}
+                <input
+                  type="number"
+                  min="1"
+                  max="30"
+                  placeholder={props.user.price}
+                  onChange={handlePrice}
+                />{' '}
+                ,- €
+              </p>
+              <p>
+                Experience:{' '}
+                <input
+                  type="number"
+                  placeholder={props.user.experience}
+                  min="1"
+                  max="10"
+                  onChange={handleExperience}
+                />{' '}
+                years
+              </p>
+              <p>
+                Description:{' '}
+                <input
+                  placeholder={props.user.description}
+                  onChange={handleDescription}
+                />
+              </p>
+            </>
           </>
         ) : (
           ''
@@ -247,73 +230,53 @@ export default function ProfilePlantsitter(props) {
                   </p>
                 )}
                 {console.log('imageSrc', imageSrc)}
-                {/*{uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
-          )}*/}
               </form>
               <div className="divider" />
             </div>
             <p>
-              District:
-              <select
-                name="discrict"
-                id="disctrict"
-                onClick={handleDistrict}
-                required
-              >
-                <option value="">None</option>
+              District*: {props.user.district}{' '}
+              <select name="discrict" onClick={handleDistrict}>
                 <option value="1010 Vienna">1010 Vienna</option>
                 <option value="1020 Vienna">1020 Vienna</option>
                 <option value="1030 Vienna">1030 Vienna</option>
                 <option value="1040 Vienna">1040 Vienna</option>
               </select>
-              *
             </p>
             <p>
               Plants:{' '}
               <input
-                className="rounded-lg border-white mt-5"
                 type="number"
                 min="1"
                 max="30"
                 placeholder={props.user.plants}
                 onChange={handlePlants}
-                required
               />{' '}
-              plants*
+              plants
             </p>
             <p>
-              Maximum price:{' '}
+              Price:{' '}
               <input
-                className="rounded-lg border-white my-5"
                 type="number"
                 min="1"
                 max="30"
                 placeholder={props.user.price}
                 onChange={handlePrice}
-                required
               />{' '}
-              ,- € *
+              ,- €
             </p>
             <p>
               Description:{' '}
               <input
-                className=" mb-5"
                 placeholder={props.user.description}
                 onChange={handleDescription}
-                required
               />
-              *
             </p>
           </>
         ) : (
           ''
         )}
-        <input
-          type="submit"
-          value=" Update Profile"
+
+        <a
           className="bg-primary rounded-lg p-3"
           onClick={async () => {
             const response = await fetch(`/api/users/${props.user.id}`, {
@@ -347,8 +310,11 @@ export default function ProfilePlantsitter(props) {
 
             setUser([data.user]);
           }}
-        />
-      </form>
+          href={`/profile/${props.user.username}`}
+        >
+          Update Profile
+        </a>
+      </>
     </>
   );
 }

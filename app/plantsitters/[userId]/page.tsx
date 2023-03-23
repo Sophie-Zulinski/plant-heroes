@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getUsers } from '../../../database/users';
@@ -51,7 +50,7 @@ export default async function PlantSitter(props: Props) {
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center">
           <img
             className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-            src={singleUser.img}
+            src={singleUser.img ? singleUser.img : '/images/pic07.jpg'}
             alt={singleUser.username}
           />
 

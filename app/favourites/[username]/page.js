@@ -1,4 +1,4 @@
-import dateFormat, { masks } from 'dateformat';
+import dateFormat from 'dateformat';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getFavourites } from '../../../database/favourites';
@@ -18,7 +18,7 @@ export default async function Favourites({ params }) {
   console.log('receiver', receiver);
 
   const userfavourites = users.filter(
-    (users) => users.id === receiver.userReceiverId,
+    (user) => user.id === receiver.userReceiverId,
   );
 
   console.log('favourites', favourites);

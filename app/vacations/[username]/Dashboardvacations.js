@@ -1,10 +1,12 @@
 'use client';
-import dateFormat, { masks } from 'dateformat';
+import dateFormat from 'dateformat';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Vacations(props) {
-  const [users, setUser] = useState(props);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [users, setUsers] = useState(props);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState();
   const router = useRouter();
 
@@ -18,27 +20,6 @@ export default function Vacations(props) {
   function handleEndDate(x) {
     setEndDate(x.target.value);
   }
-
-  const [result, setResult] = useState('');
-  const handleImageUpload = (event) => {
-    event.preventDefault();
-    const file = event.currentTarget['fileInput'].files[0];
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    fetch('https://echo-api.3scale.net/', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setResult(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   return (
     <>
@@ -103,7 +84,7 @@ export default function Vacations(props) {
 
           router.refresh();
 
-          setUser([data.user]);
+          setUsers([data.user]);
         }}
       >
         Update Vacation

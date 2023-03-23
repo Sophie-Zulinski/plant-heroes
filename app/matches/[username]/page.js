@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getUserByUsername, getUsers } from '../../../database/users';
 import Dashboardmatches from './Dashboardmatches';
-import Length from './Length';
 
 export default async function UserMatches({ params }) {
   const user = await getUserByUsername(params.username);

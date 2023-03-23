@@ -1,8 +1,6 @@
+// eslint-disable-next-line no-restricted-syntax
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Home() {

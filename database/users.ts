@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import { cache } from 'react';
 import { sql } from './connect';
 
@@ -10,8 +9,8 @@ export type User = {
   description: string;
   role: string;
   plants: string | null;
-  startDate: string | null;
-  endDate: string | null;
+  startDate: string;
+  endDate: string;
   img: string | null;
 };
 type UserWithPasswordHash = User & {

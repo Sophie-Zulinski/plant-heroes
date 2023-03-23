@@ -1,13 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import './globals.css';
-import { Cloudinary } from '@cloudinary/url-gen';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import {
-  getUserBySessionToken,
-  getUserByUsername,
-  getUsers,
-} from '../database/users';
+import { getUserBySessionToken, getUsers } from '../database/users';
 import Length from './matches/[username]/Length';
 
 export const dynamic = 'force-dynamic';
@@ -36,7 +31,6 @@ export default async function RootLayout({ children }) {
         <link rel="icon" href="/images/favicon.ico" />
         <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/images/icon-apple-touch.png" />
-        <link rel="manifest" href="/manifest.json" />
       </head>
 
       <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed ">
@@ -81,17 +75,12 @@ export default async function RootLayout({ children }) {
                         </Link>
                         <Link href={`/vacations/${user.username}`}>
                           My Vacations
-                          <span className="badge bg-secondary">1</span>
                         </Link>
                         <Link href={`/matches/${user.username}`}>
                           My Matches
                           <span className="badge bg-secondary">
                             <Length user={user} users={users} />
                           </span>
-                        </Link>
-                        <Link href="/">
-                          My Favourites
-                          <span className="badge bg-secondary">1</span>
                         </Link>
                         <Link href="/logout" prefetch={false}>
                           Logout

@@ -9,6 +9,7 @@ const userType = z.object({
 });
 
 export async function GET(request: NextRequest) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { searchParams } = new URL(request.url);
 
   const users = await getUsers();
@@ -28,7 +29,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          'Request body is missing one of the needed properties name, type and accessory ',
+          'Request body is missing one of the needed properties username, passwordHash ',
       },
       { status: 400 },
     );

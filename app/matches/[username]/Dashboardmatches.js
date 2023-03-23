@@ -1,5 +1,5 @@
 'use client';
-import dateFormat, { masks } from 'dateformat';
+import dateFormat from 'dateformat';
 import Image from 'next/image';
 import Link from 'next/link';
 

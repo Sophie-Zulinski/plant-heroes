@@ -1,12 +1,12 @@
 'use client';
 
-import { defaultConfig } from 'next/dist/server/config-shared';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Dashboard(props) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errors, setErrors] = useState([]);
-  const [favourites, setFavourites] = useState([]);
+
   const router = useRouter();
   console.log('props.singeUser.id', props.singleUser.id);
 

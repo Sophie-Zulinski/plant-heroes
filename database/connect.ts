@@ -1,4 +1,3 @@
-import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 
 // Type needed for the connection function below
