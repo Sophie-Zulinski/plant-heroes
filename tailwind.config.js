@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     require('daisyui'),
-    require('@tailwindcss/forms'),
+
     function ({ addBase, theme, addComponents }) {
       addBase({
         h1: { fontSize: theme('fontSize.3xl') },

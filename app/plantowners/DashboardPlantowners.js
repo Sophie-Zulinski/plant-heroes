@@ -1,5 +1,5 @@
 'use client';
-import 'react-nice-dates/build/style.css';
+
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import dateFormat from 'dateformat';
