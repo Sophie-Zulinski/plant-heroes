@@ -6,6 +6,10 @@ import Length from './matches/[username]/Length';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = {
+  title: 'Plant Heroes',
+  description: 'The ultimate plantsitter platform',
+};
 export default async function RootLayout({ children }) {
   // 1. get the session token from the cookie
   const cookieStore = cookies();
@@ -84,6 +88,9 @@ export default async function RootLayout({ children }) {
                           <span className="badge bg-secondary">
                             <Length user={user} users={users} />
                           </span>
+                        </Link>
+                        <Link href={`/favourites/${user.username}`}>
+                          My Favourites
                         </Link>
                         <Link href="/logout" prefetch={false}>
                           Logout

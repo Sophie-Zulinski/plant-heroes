@@ -6,12 +6,12 @@ export async function up(sql) {
   password_hash varchar(70) NOT NULL,
   district varchar (20),
   price int,
-  experience varchar (10),
-  description varchar(100),
-  start_date varchar (15) ,
-  end_date varchar (15),
+  experience varchar (10) ,
+  description varchar(100)  ,
+  start_date varchar (15)  ,
+  end_date varchar (15) ,
   role varchar(15),
-  plants varchar (10),
+  plants varchar (10) ,
   img varchar (120)
 
 )

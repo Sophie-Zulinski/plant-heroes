@@ -1,9 +1,5 @@
 const favourites = [
-  {
-    id: 1,
-    user_receiver_id: 2,
-    user_giver_id: 4,
-  },
+  { id: 1, user_receiver_id: 2, user_giver_id: 4 },
   {
     id: 2,
     user_receiver_id: 3,

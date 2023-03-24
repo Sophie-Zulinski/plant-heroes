@@ -9,7 +9,7 @@ export default async function Favourites({ params }) {
   const users = await getUsers();
   const singleUser = await getUserByUsername(params.username);
 
-  console.log('user', singleUser);
+  console.log('SingleUser', singleUser);
 
   const receiver = favourites.find((user) => {
     return user.userGiverId === singleUser.id;
@@ -22,6 +22,7 @@ export default async function Favourites({ params }) {
   );
 
   console.log('favourites', favourites);
+
   return (
     <main className="min-h-screen">
       <div className="flex justify-center items-center ">
