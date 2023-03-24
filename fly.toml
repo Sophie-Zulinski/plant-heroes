@@ -1,4 +1,4 @@
-app = "plant-heroes"
+app = "plant-heroes-vienna"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
