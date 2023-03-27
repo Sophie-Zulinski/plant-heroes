@@ -22,7 +22,7 @@ export default async function Favourites({ params }) {
   );
 
   console.log('favourites', favourites);
-
+  console.log('favourites', receiver.userReceiverId);
   return (
     <main className="min-h-screen">
       <div className="flex justify-center items-center ">
@@ -47,8 +47,8 @@ export default async function Favourites({ params }) {
                   <Link
                     href={`/${
                       user.role === 'Plantsitter'
-                        ? 'plantowners'
-                        : 'plantsitters'
+                        ? 'plantsitters'
+                        : 'plantowners'
                     }/${user.id}`}
                   >
                     <h2>{user.username}</h2>

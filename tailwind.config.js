@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}', // Note the addition of the `app` directory.
@@ -11,6 +12,11 @@ module.exports = {
   theme: {
     backgroundImage: {
       hero: "url('../public/images/pic07.jpg')",
+    },
+    extend: {
+      fontFamily: {
+        mulish: ['"Mulish"', ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [

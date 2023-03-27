@@ -31,12 +31,15 @@ export default async function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/images/icon-apple-touch.png" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Mulish:wght@400&display=optional"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="globals.css" />
       </head>
 
-      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed ">
+      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed mulish">
         <header>
           <div className="navbar bg-base-100 bg-neutral">
             <div className="flex-1">
@@ -111,9 +114,9 @@ export default async function RootLayout({ children }) {
         {children}
         <footer className="footer footer-center p-2 bg-base-100 text-base-content rounded bg-neutral">
           <div className="grid grid-flow-col gap-4">
-            <a className="link link-hover">About us</a>
+            <a className="link link-hover">Home</a>
             <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
+            <a className="link link-hover">About us</a>
             <a className="link link-hover">Press kit</a>
           </div>
           <div>

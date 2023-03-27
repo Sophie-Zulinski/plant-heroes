@@ -1,9 +1,9 @@
 const favourites = [
-  { id: 1, user_receiver_id: 2, user_giver_id: 4 },
+  { id: 1, user_receiver_id: 10, user_giver_id: 8 },
   {
     id: 2,
-    user_receiver_id: 3,
-    user_giver_id: 1,
+    user_receiver_id: 5,
+    user_giver_id: 4,
   },
 ];
 export async function up(sql) {

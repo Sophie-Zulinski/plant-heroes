@@ -72,7 +72,7 @@ export default function PlantOwnerDashboard(props) {
   }
   console.log('userspantowners', usersplantowners);
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen font-mulish">
       <div className="sm:flex flex-row justify-evenly m ">
         <div className="flex flex-col h-max p-5 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
           <h2>Find plants near you </h2>
@@ -168,17 +168,14 @@ export default function PlantOwnerDashboard(props) {
                   className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
                   key={`user-${user.id}`}
                 >
-                  {user.img ? (
-                    <Image
-                      className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                      src={user.img}
-                      alt={user.username}
-                      width="300"
-                      height="300"
-                    />
-                  ) : (
-                    ''
-                  )}{' '}
+                  <Image
+                    className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                    src={user.img ? user.img : '/images/pic07.jpg'}
+                    alt={user.username}
+                    width="300"
+                    height="300"
+                  />
+
                   <Link href={`/plantowners/${user.id}`}>
                     <h2>{user.username}</h2>
                     <h4>{user.district}</h4>
@@ -213,17 +210,14 @@ export default function PlantOwnerDashboard(props) {
                   className="flex flex-row p-5 gap-4 h-max bg-white rounded-md mt-5 justify-center items-center "
                   key={`user-${user.id}`}
                 >
-                  {user.img ? (
-                    <Image
-                      className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                      src={user.img}
-                      alt={user.username}
-                      width="300"
-                      height="300"
-                    />
-                  ) : (
-                    ''
-                  )}{' '}
+                  <Image
+                    className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
+                    src={user.img ? user.img : '/images/pic07.jpg'}
+                    alt={user.username}
+                    width="300"
+                    height="300"
+                  />
+
                   <Link href={`/plantowners/${user.id}`}>
                     <h2>{user.username}</h2>
                     <h4>{user.district}</h4>

@@ -53,7 +53,7 @@ export default function PlantSitterDashboard(props) {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen font-mulish">
       <div className="sm:flex flex-row justify-evenly m ">
         <div className="flex flex-col h-max p-12 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
           <h2>Find plant heroes near you </h2>
@@ -166,7 +166,7 @@ export default function PlantSitterDashboard(props) {
                 >
                   <Image
                     className="w-24 h-24 mb-3 rounded-full shadow-lg border-solid border-2 border-secondary"
-                    src={user.img}
+                    src={user.img ? user.img : '/images/pic07.jpg'}
                     alt={user.username}
                     width="300"
                     height="300"
