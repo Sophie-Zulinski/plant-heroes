@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
           <div className="navbar bg-base-100 bg-neutral">
             <div className="flex-1">
               <a className="btn btn-ghost normal-case text-xl" href="/">
-                Home
+                <img src="/images/Home.png" alt="Home" width="25" />
               </a>
             </div>
             <div className="flex-none gap-2">
