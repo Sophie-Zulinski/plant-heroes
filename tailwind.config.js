@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        mulish: ['"Mulish"', ...defaultTheme.fontFamily.sans],
+        marcellus: ['"Marcellus"', ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -53,7 +53,7 @@ export default function PlantSitterDashboard(props) {
   }
 
   return (
-    <main className="min-h-screen font-mulish">
+    <main className="min-h-screen">
       <div className="sm:flex flex-row justify-evenly m ">
         <div className="flex flex-col h-max p-12 gap-4 my-20 bg-white rounded-md mt-5 justify-center items-center">
           <h2>Find plant heroes near you </h2>
