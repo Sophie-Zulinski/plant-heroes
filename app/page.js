@@ -40,7 +40,7 @@ export default function Home() {
           </div>
 
           <a className="bg-primary rounded-lg p-3" href={`/${role}`}>
-            Discover
+            Discover now
           </a>
         </div>
       </div>
