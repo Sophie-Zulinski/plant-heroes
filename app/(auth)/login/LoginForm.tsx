@@ -43,6 +43,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
             }}
           >
             <div className="flex flex-col  gap-4">
+              <h1>Please register here: </h1>
               {errors.map((error) => (
                 <div key={`error-${error.message}`}>Error: {error.message}</div>
               ))}
