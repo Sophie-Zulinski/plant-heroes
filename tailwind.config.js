@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        marcellus: ['"Marcellus"', ...defaultTheme.fontFamily.sans],
+        sans: ['Lato', ...defaultTheme.fontFamily.sans],
       },
     },
   },

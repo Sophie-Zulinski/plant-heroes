@@ -31,15 +31,9 @@ export default async function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap"
-          rel="stylesheet"
-        />
       </head>
 
-      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed font-marcellus">
+      <body className="bg-hero bg-no-repeat bg-cover bg-center bg-fixed font-mono">
         <header>
           <div className="navbar bg-base-100 bg-neutral">
             <div className="flex-1">

@@ -9,6 +9,7 @@ export default function Home() {
   }
 
   return (
+
     <main className="min-h-screen">
       <div className="flex flex-col justify-center items-center ">
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center mb-20">
