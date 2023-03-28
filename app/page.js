@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex flex-col justify-center items-center ">
         <div className="flex flex-col p-20 gap-4 bg-white rounded-md mt-10 justify-center items-center mb-20">
           <div className="flex flex-col gap-4">
-            <h2>Welcome to Plant Heroes! </h2>{' '}
+            <h2>Welcome to Plant Heroes Vienna! </h2>{' '}
             <div>Please let us know what you are looking for: </div>
             <div className="flex flex-row space-x-4">
               <input
