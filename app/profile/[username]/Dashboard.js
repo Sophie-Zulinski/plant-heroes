@@ -33,7 +33,7 @@ export default function ProfilePlantsitter(props) {
           <p>District: {props.user.district} </p>
           <p>Experience: {props.user.experience} years </p>
           <p>Price: {props.user.price},- € </p>
-          <p>Description: {props.user.description} </p>
+          <p>Your description: {props.user.description} </p>
         </>
       ) : (
         ''
@@ -45,7 +45,7 @@ export default function ProfilePlantsitter(props) {
           <p>District: {props.user.district} </p>
           <p>Plants: {props.user.plants} plants </p>
           <p>Price: {props.user.price},- € </p>
-          <p>Description: {props.user.description} </p>
+          <p>Your description: {props.user.description} </p>
         </>
       ) : (
         ''

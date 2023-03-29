@@ -88,8 +88,7 @@ export async function PUT(
 
     return NextResponse.json(
       {
-        error:
-          'Request body is missing one of the needed properties name, district and price ',
+        error: 'Please fill out all fields with a * ',
       },
       { status: 400 },
     );
