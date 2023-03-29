@@ -3,7 +3,6 @@ import { z } from 'zod';
 import {
   createFavourite,
   getFavourites,
-  getFavouritesWithUserinfo,
 } from '../../../../database/favourites';
 
 const userType = z.object({
