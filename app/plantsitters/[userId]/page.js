@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
-import { getUsers } from '../../../database/users';
+import { getUserBySessionToken, getUsers, User } from '../../../database/users';
 import { createTokenFromSecret } from '../../../utils/csrf';
+import Dashboard from './Dashboardfavourites';
 
 export default async function PlantSitter(props) {
   // check if i have a valid session
@@ -15,16 +16,30 @@ export default async function PlantSitter(props) {
   // for example you may also check if session user is an admin role
 
   if (!session) {
-    redirect(`/login?returnTo=/plantsitters/`);
+    redirect(`/login?returnTo=/plantsowners/`);
   }
+
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  // 2. validate that session
+  // 3. get the user profile matching the session
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
+  // if user is not undefined, the person is logged in
+  // if user is undefined, the person is logged out
+
+  console.log('userplantownerspage', user);
 
   const csrfToken = createTokenFromSecret(session.csrfSecret);
   const users = await getUsers();
-  const singleUser = users.find((user) => {
-    return user.id === parseInt(props.params.userId);
+  const singleUser = users.find((user2) => {
+    return user2.id === parseInt(props.params.userId);
   });
-
-  console.log('props', props);
+  console.log('singeUser', singleUser.img);
+  console.log('singleUser', singleUser);
   console.log('csrfToken', csrfToken);
   return (
     <main className="min-h-screen">
@@ -37,33 +52,6 @@ export default async function PlantSitter(props) {
           />
 
           <h1>{singleUser.username}</h1>
-          <div className="rating">
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-          </div>
 
           <span>{singleUser.district}</span>
 
@@ -76,6 +64,7 @@ export default async function PlantSitter(props) {
           >
             Send request
           </a>
+          <Dashboard singleUser={singleUser} user={user} />
         </div>
       </div>
     </main>

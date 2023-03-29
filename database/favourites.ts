@@ -5,6 +5,7 @@ export type Favourites = {
   id: number;
   user_giver_id: number;
   user_receiver_id: number;
+  username: string;
 };
 
 export const getFavourites = cache(async () => {
@@ -69,7 +70,8 @@ export type FavouritesWithUserinfo = {
   username: string;
 };
 
-export const getFavouritesWithUserinfo = cache(
+{
+  /*export const getFavouritesWithUserinfo = cache(
   async (
     id: number,
     user_receiver_id: number,
@@ -94,4 +96,22 @@ export const getFavouritesWithUserinfo = cache(
   `;
     return favouriteswithuserinfo;
   },
-);
+);*/
+}
+
+export const deleteFavouriteById = cache(async (user_receiver_id: number) => {
+  const [favourite] = await sql<Favourites[]>`
+    DELETE FROM
+      favourites
+    WHERE
+      user_receiver_id = ${user_receiver_id}
+    RETURNING *
+  `;
+  return favourite;
+});
+
+export type Userreceiverprofile = {
+  user_giver_id: number;
+  user_receiver_id: number;
+  username: string;
+};

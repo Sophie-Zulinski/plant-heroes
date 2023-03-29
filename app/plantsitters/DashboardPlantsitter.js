@@ -68,7 +68,7 @@ export default function PlantSitterDashboard(props) {
             <option value="1040 Vienna">1040 Vienna</option>
           </select>
 
-          <div>Price: </div>
+          <div>Maximum Price: </div>
 
           <Box width={300}>
             <Slider

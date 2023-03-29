@@ -55,33 +55,6 @@ export default async function PlantOwners(props) {
             height="300"
           />{' '}
           <h1>{singleUser.username}</h1>
-          <div className="rating">
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-          </div>
           <div className="flex flex-row">
             {singleUser.startDate !== '1111-11-11' ? (
               <h4>

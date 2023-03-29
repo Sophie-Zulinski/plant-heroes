@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
   createFavourite,
+  deleteFavouriteById,
   getFavouriteID,
   updateFavourites,
 } from '../../../../../database/favourites';
