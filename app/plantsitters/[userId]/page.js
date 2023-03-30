@@ -16,7 +16,7 @@ export default async function PlantSitter(props) {
   // for example you may also check if session user is an admin role
 
   if (!session) {
-    redirect(`/login?returnTo=/plantsowners/`);
+    redirect(`/login?returnTo=/plantsitters/`);
   }
 
   const cookieStore = cookies();
