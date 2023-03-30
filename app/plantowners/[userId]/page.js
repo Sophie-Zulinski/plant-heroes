@@ -18,7 +18,7 @@ export default async function PlantOwners(props) {
   // for example you may also check if session user is an admin role
 
   if (!session) {
-    redirect(`/login?returnTo=/plantsowners/`);
+    redirect(`/login?returnTo=/plantowners/`);
   }
 
   const cookieStore = cookies();
@@ -56,6 +56,7 @@ export default async function PlantOwners(props) {
           />{' '}
           <h1>{singleUser.username}</h1>
           <div className="flex flex-row">
+            Upcoming vacation:{' '}
             {singleUser.startDate !== '1111-11-11' ? (
               <h4>
                 {dateFormat(singleUser.startDate, 'mmmm dS')} {'-'}{' '}
