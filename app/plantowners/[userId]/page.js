@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getUserBySessionToken, getUsers, User } from '../../../database/users';
 import { createTokenFromSecret } from '../../../utils/csrf';
-import Dashboard from './Dashboardfavourites';
+import Dashboard from '../../plantsitters/[userId]/Dashboardfavourites';
 
 export default async function PlantOwners(props) {
   // check if i have a valid session
@@ -71,7 +71,10 @@ export default async function PlantOwners(props) {
           </div>
           <span>{singleUser.district}</span>
           <span>Max. price: {singleUser.price},- €/hour</span>
-          <span>{singleUser.plants} plants</span>
+          <span>
+            {' '}
+            {singleUser.plants} {singleUser.plants >= 2 ? 'plants' : 'plant'}
+          </span>
           <span>{singleUser.description}</span>
           <a
             className="bg-primary rounded-lg p-3"
@@ -79,7 +82,9 @@ export default async function PlantOwners(props) {
           >
             Send request
           </a>
-          <Dashboard singleUser={singleUser} user={user} />
+          <div>
+            <Dashboard singleUser={singleUser} user={user} />
+          </div>
         </div>
       </div>
     </main>

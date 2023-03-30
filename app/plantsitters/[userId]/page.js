@@ -64,7 +64,9 @@ export default async function PlantSitter(props) {
           >
             Send request
           </a>
-          <Dashboard singleUser={singleUser} user={user} />
+          <div>
+            <Dashboard singleUser={singleUser} user={user} />
+          </div>
         </div>
       </div>
     </main>

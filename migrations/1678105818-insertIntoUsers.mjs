@@ -192,7 +192,7 @@ const users = [
     district: '1030 Vienna',
     price: 1,
     experience: 10,
-    description: 'My plant is my berst friend, I would die for it!',
+    description: 'My plant is my best friend, I would die for it!',
     start_date: '2023-05-08',
     end_date: '2023-05-10',
     role: 'Plantowner',

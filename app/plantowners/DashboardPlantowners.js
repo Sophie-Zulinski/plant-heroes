@@ -41,7 +41,7 @@ export default function PlantOwnerDashboard(props) {
   );
 
   const usersfilteredplants = usersfilteredprice.filter(
-    (user) => parseInt(user.plants) >= parseInt(plants),
+    (user) => parseInt(user.plants) <= parseInt(plants),
   );
   const [filter, setFilter] = useState('');
   function handleFilter() {
@@ -86,12 +86,11 @@ export default function PlantOwnerDashboard(props) {
             <option value="1030 Vienna">1030 Vienna</option>
             <option value="1040 Vienna">1040 Vienna</option>
           </select>
-          <div className="border-solid  border-secondary">
+          <br />
+          <div className="border-solid border-secondary">
             <div>
               {' '}
-              <label htmlFor="start">
-                I want to be a plant hero from/to these dates:
-              </label>
+              <label htmlFor="start">I wand to be a plant hero from/to:</label>
             </div>
 
             <input
@@ -102,7 +101,8 @@ export default function PlantOwnerDashboard(props) {
             />
             <input type="date" id="end" name="end" onChange={handleEndDate} />
           </div>
-          <div>Price: </div>
+          <br />
+          <div>My price starts from: </div>
           <Box width={300}>
             <Slider
               min={0}
@@ -123,7 +123,7 @@ export default function PlantOwnerDashboard(props) {
 
             <span> 30 €</span>
           </div>
-          <div>Number of Plants: </div>
+          <div>Maximum number of plants: </div>
 
           <Box width={300}>
             <Slider
@@ -236,7 +236,11 @@ export default function PlantOwnerDashboard(props) {
                       )}
                     </div>
                     <h4>Price: {user.price},- €/hour </h4>
-                    <h4>{user.plants} plants</h4>
+
+                    <h4>
+                      {user.plants} {user.plants >= 2 ? 'plants' : 'plant'}
+                    </h4>
+
                     <br />
                     <button>Check out profile</button>
                   </Link>
