@@ -42,9 +42,6 @@ export default async function RootLayout({ children }) {
               </a>
             </div>
             <div className="flex-none gap-2">
-              <div className="form-control">
-                <input placeholder="Search" className="input input-bordered" />
-              </div>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
@@ -66,7 +63,7 @@ export default async function RootLayout({ children }) {
                   <li>
                     {user ? (
                       <>
-                        Logged in as: {user.username}
+                        Welcome, {user.username}!
                         <Link
                           href={`/profile/${user.username}`}
                           prefetch={false}
