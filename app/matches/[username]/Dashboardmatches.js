@@ -49,21 +49,32 @@ export default function Matches(props) {
                 <h2>{user.username}</h2>
                 <h4>{user.district}</h4>
                 <div className="flex flex-row">
-                  {user.startDate !== '1111-11-11' ? (
+                  {user.startDate !== '1111-11-11' &&
+                  props.user.role === 'Plantsitter' ? (
                     <h4>
                       {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
                     </h4>
                   ) : (
                     ''
                   )}{' '}
-                  {user.endDate !== '1111-11-11' ? (
+                  {user.endDate !== '1111-11-11' &&
+                  props.user.role === 'Plantsitter' ? (
                     <h4>{dateFormat(user.endDate, 'mmmm dS yyyy')} </h4>
                   ) : (
                     ''
                   )}
                 </div>
+                {props.user.role === 'Plantowner' ? (
+                  <h4>{user.experience} years of experience</h4>
+                ) : (
+                  ''
+                )}
                 <h4>Price: {user.price},- €/hour </h4>
-                <h4>{user.plants} plants</h4>
+                {props.user.role === 'Plantsitter' ? (
+                  <h4>{user.plants} plants</h4>
+                ) : (
+                  ''
+                )}
                 <br />
 
                 <button>Check out profile</button>
