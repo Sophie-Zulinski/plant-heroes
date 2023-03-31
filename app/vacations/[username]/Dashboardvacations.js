@@ -31,10 +31,12 @@ export default function Vacations(props) {
       <p>Role: {props.user.role} </p>
       <div className="flex flex-row">
         {props.user.startDate !== '1111-11-11' ? (
-          <h4>
-            Your next vacation: {dateFormat(props.user.startDate, 'mmmm dS')}{' '}
-            {'-'}{' '}
-          </h4>
+          <>
+            <h4>
+              Your next vacation: {dateFormat(props.user.startDate, 'mmmm dS')}{' '}
+            </h4>
+            <h4 className="mx-1"> - </h4>
+          </>
         ) : (
           ''
         )}{' '}

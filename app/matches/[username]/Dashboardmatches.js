@@ -51,9 +51,10 @@ export default function Matches(props) {
                 <div className="flex flex-row">
                   {user.startDate !== '1111-11-11' &&
                   props.user.role === 'Plantsitter' ? (
-                    <h4>
-                      {dateFormat(user.startDate, 'mmmm dS')} {'-'}{' '}
-                    </h4>
+                    <>
+                      <h4>{dateFormat(user.startDate, 'mmmm dS')}</h4>
+                      <h4 className="mx-1"> - </h4>
+                    </>
                   ) : (
                     ''
                   )}{' '}
