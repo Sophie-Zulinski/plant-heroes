@@ -16,7 +16,7 @@ export default function Dashboard(props) {
     <div className=" flex justify-center items-center ">
       <div>
         {showMore && (
-          <div className=" flex justify-center items-center bg-secondary m-5 p-5 br-2 rounded-lg">
+          <div className=" flex justify-center items-center border-secondary border-2 m-5 p-5 br-2 rounded-lg">
             User added to favourites
           </div>
         )}
