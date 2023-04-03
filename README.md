@@ -26,13 +26,13 @@ Plant Heroes is a full stack web application, that connects plantowners with pla
 
 ## Set-Up instructions:
 
-Clone the repository with git clone <repo>
-Setup the database by downloading and installing PostgreSQL
-Create a user and a database
-Create a new file .env
-Copy the environment variables from .env-example into .env
-Replace the placeholders xxxxx with your username, password and name of database
-Install dotenv-cli with yarn add dotenv-cli
-Run yarn install in your command line
-Run the migrations with yarn migrate up
-Start the server by running yarn dev
+- Clone the repository with git clone <repo>
+- Setup the database by downloading and installing PostgreSQL
+- Create a user and a database
+- Create a new file .env
+- Copy the environment variables from .env-example into .env
+- Replace the placeholders xxxxx with your username, password and name of database
+- Install dotenv-cli with yarn add dotenv-cli
+- Run yarn install in your command line
+- Run the migrations with yarn migrate up
+- Start the server by running yarn dev
