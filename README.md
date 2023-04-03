@@ -36,3 +36,7 @@ Plant Heroes is a full stack web application, that connects plantowners with pla
 - Run yarn install in your command line
 - Run the migrations with yarn migrate up
 - Start the server by running yarn dev
+
+## Screenshots:
+
+<img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532536/Plant-Heroes-6_edbtnq.png'/>
