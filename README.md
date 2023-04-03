@@ -39,4 +39,17 @@ Plant Heroes is a full stack web application, that connects plantowners with pla
 
 ## Screenshots:
 
+Home
 <img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532536/Plant-Heroes-6_edbtnq.png'/>
+
+All users (plantowners)
+<img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532348/Plant-Heroes-1_bsgxrs.png'/>
+
+Single profile page
+<img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532347/Plant-Heroes-4_swhbmh.png'/>
+
+Update profile form
+<img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532351/Plant-Heroes-2_qxvmwz.png'/>
+
+Matches page
+<img src='https://res.cloudinary.com/dtz9u2nae/image/upload/v1680532348/Plant-Heroes-3_ybu2tc.png'/>
