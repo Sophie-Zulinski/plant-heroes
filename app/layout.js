@@ -105,7 +105,9 @@ export default async function RootLayout({ children }) {
         {children}
         <footer className="footer footer-center p-2 bg-base-100 text-base-content rounded bg-neutral">
           <div className="grid grid-flow-col gap-4">
-            <a className="link link-hover">Home</a>
+            <a className="link link-hover" href="/">
+              Home
+            </a>
             <a className="link link-hover">Contact</a>
             <a className="link link-hover">About us</a>
             <a className="link link-hover">Press kit</a>
