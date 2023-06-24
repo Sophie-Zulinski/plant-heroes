@@ -108,7 +108,12 @@ export default async function RootLayout({ children }) {
             <a className="link link-hover" href="/">
               Home
             </a>
-            <a className="link link-hover">Contact</a>
+            <a
+              className="link link-hover"
+              href="mailto:sophie.zulinski@gmx.at?&subject=Question for plant heroes"
+            >
+              Contact
+            </a>
             <a className="link link-hover">About us</a>
             <a className="link link-hover">Press kit</a>
           </div>
